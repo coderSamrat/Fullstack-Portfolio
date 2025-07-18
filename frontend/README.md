@@ -1,12 +1,65 @@
-# React + Vite
+## Frontend - Fullstack Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the Fullstack Portfolio project, built with React, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+### Features
+- ⚡️ Fast development with [Vite](https://vitejs.dev/)
+- 🎨 Styled using [Tailwind CSS](https://tailwindcss.com/)
+- 🧩 Modular React components
+- 🛠️ Utility functions and modern tooling
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Getting Started
 
-## Expanding the ESLint configuration
+#### 1. Install dependencies
+```sh
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### 2. Start the development server
+```sh
+npm run dev
+```
+The app will be available at [http://localhost:5173](http://localhost:5173) by default.
+
+#### 3. Build for production
+```sh
+npm run build
+```
+
+#### 4. Preview the production build
+```sh
+npm run preview
+```
+
+### Project Structure
+
+```
+frontend/
+├── src/
+│   ├── App.jsx         # Main React component
+│   ├── main.jsx        # Entry point
+│   ├── index.css       # Tailwind and global styles
+│   └── lib/
+│       └── utils.js    # Utility functions
+├── index.html          # HTML template
+├── package.json        # Project metadata and scripts
+├── vite.config.js      # Vite configuration
+└── ...
+```
+
+### Aliases
+You can use `@/` to import from `src/` thanks to the Vite alias configuration.
+
+### Linting
+Run ESLint to check for code quality issues:
+```sh
+npm run lint
+```
+
+### Customization
+- Tailwind CSS is configured in `src/index.css`.
+- Component and utility aliases are set in `components.json` and `jsconfig.json`.
+
+---
+
+**Author:** Samrat Mallick
