@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+      --font-ebgaramond: 'EB Garamond', serif;
+}
 
 @theme inline {
       --radius-sm: calc(var(--radius) - 4px);
@@ -113,9 +118,27 @@
 @layer base {
       * {
             @apply border-border outline-ring/50;
+            font-family: var(--font-ebgaramond);
+      }
+
+      html {
+            @apply scroll-smooth;
       }
 
       body {
             @apply bg-background text-foreground;
+      }
+
+      ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+      }
+
+      ::-webkit-scrollbar-track {
+            background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+            background: transparent;
       }
 }
