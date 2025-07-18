@@ -1,0 +1,28 @@
+{
+      "name": "backend",
+      "version": "1.0.0",
+      "description": "A full-stack developer portfolio powered by the MERN stack — built to showcase your projects, skills, responsive design.",
+      "keywords": [
+            "JavaScript",
+            "Express",
+            "MongoDb"
+      ],
+      "license": "ISC",
+      "author": "Samrat Mallick",
+      "type": "module",
+      "main": "/src/index.js",
+      "scripts": {
+            "start": "node src/index.js",
+            "dev": "nodemon src/index.js"
+      },
+      "dependencies": {
+            "cors": "^2.8.5",
+            "dotenv": "^17.2.0",
+            "express": "^5.1.0",
+            "mongoose": "^8.16.4"
+      },
+      "devDependencies": {
+            "nodemon": "^3.1.10",
+            "prettier": "^3.6.2"
+      }
+}
