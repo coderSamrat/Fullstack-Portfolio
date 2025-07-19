@@ -1,47 +1,34 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { toast } from 'sonner';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import UserViewContact from './pages/client-view/contact';
+import UserViewHome from './pages/client-view/home';
+import ProjectList from './pages/client-view/project';
+import UserPagelayout from './components/user-view/layout';
+import { useDisableContextMenuAndCopy } from './components/common/useDisableContextMenuAndCopy';
 
-function App() {
+const App = () => {
+      // useDisableContextMenuAndCopy();
+
+      const location = useLocation();
+      const navigate = useNavigate();
+
       useEffect(() => {
-            const handleContextMenu = (e) => {
-                  e.preventDefault();
-                  toast.error('Right-click is disabled!', {
-                        action: {
-                              label: 'OK',
-                              onClick: () => console.log('Right-click disabled notification dismissed')
-                        }
-                  });
-            };
-
-            const handleCopy = (e) => {
-                  e.preventDefault();
-                  toast.error('Copying is disabled!', {
-                        action: {
-                              label: 'OK',
-                              onClick: () => console.log('Copy disabled notification dismissed')
-                        }
-                  });
-            };
-
-            document.addEventListener('contextmenu', handleContextMenu);
-            document.addEventListener('copy', handleCopy);
-
-            return () => {
-                  document.removeEventListener('contextmenu', handleContextMenu);
-                  document.removeEventListener('copy', handleCopy);
-            };
-      }, []);
+            if (location.pathname === '/') {
+                  navigate('/home');
+            }
+      }, [location.pathname, navigate]);
 
       return (
-            <div
-                  className="select-none flex flex-col overflow-hidden bg-white min-h-screen"
-            >
+            <div className="flex flex-col overflow-hidden bg-bg min-h-screen">
                   <Routes>
-                        
+                        <Route path='/' element={<UserPagelayout />}>
+                              <Route path='home' element={<UserViewHome />} />
+                              <Route path='contact' element={<UserViewContact />} />
+                              <Route path='projects' element={<ProjectList />} />
+                        </Route>
                   </Routes>
             </div>
       );
-}
+};
 
 export default App;
