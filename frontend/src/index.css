@@ -9,6 +9,7 @@
       --color-bg: oklch(0.15 0.04 258.7 / 0.93);
       --color-base-primary: oklch(0.21 0.04 265.77);
       --color-base-secondary: oklch(0.71 0.04 256.83);
+      --color-base-tertiary: oklch(0.78 0.13 181.91);
 }
 
 @theme inline {
