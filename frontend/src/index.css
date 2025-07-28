@@ -1,18 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
-      --font-ebgaramond: 'EB Garamond', serif;
-      --color-bg: oklch(0.15 0.04 258.7 / 0.93);
-      --color-base-primary: oklch(0.21 0.04 265.77);
-      --color-base-secondary: oklch(0.71 0.04 256.83);
-      --color-base-tertiary: oklch(0.78 0.13 181.91);
-}
 
 @theme inline {
+      --font-inter: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
       --radius-sm: calc(var(--radius) - 4px);
       --radius-md: calc(var(--radius) - 2px);
       --radius-lg: var(--radius);
@@ -83,6 +80,15 @@
       --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
       --sidebar-border: oklch(0.929 0.013 255.508);
       --sidebar-ring: oklch(0.704 0.04 256.788);
+
+      --hero-gradient: linear-gradient(135deg, hsl(221 83% 53%), hsl(142 76% 73%));
+      --card-gradient: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 14% 98%));
+      --tech-glow: 0 8px 32px hsl(221 83% 53% / 0.12);
+      --accent-glow-shadow: 0 4px 20px hsl(142 76% 73% / 0.25);
+      --text-gradient: linear-gradient(135deg, hsl(221 83% 53%), hsl(142 76% 73%));
+
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .dark {
@@ -117,12 +123,17 @@
       --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
       --sidebar-border: oklch(1 0 0 / 10%);
       --sidebar-ring: oklch(0.551 0.027 264.364);
+
+      --hero-gradient: linear-gradient(135deg, hsl(221 83% 53%), hsl(142 76% 73%));
+      --card-gradient: linear-gradient(145deg, hsl(220 13% 11%), hsl(220 13% 14%));
+      --tech-glow: 0 8px 32px hsl(221 83% 53% / 0.2);
+      --accent-glow-shadow: 0 4px 20px hsl(142 76% 73% / 0.3);
+      --text-gradient: linear-gradient(135deg, hsl(221 83% 53%), hsl(142 76% 73%));
 }
 
 @layer base {
       * {
             @apply border-border outline-ring/50;
-            font-family: var(--font-ebgaramond);
       }
 
       html {
@@ -130,7 +141,7 @@
       }
 
       body {
-            @apply bg-background text-foreground;
+            @apply bg-background text-foreground font-inter;
       }
 
       ::-webkit-scrollbar {
@@ -144,5 +155,137 @@
 
       ::-webkit-scrollbar-thumb {
             background: transparent;
+      }
+
+      .text-gradient {
+            background: var(--text-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+      }
+
+      .hero-gradient {
+            background: var(--hero-gradient);
+      }
+
+      .card-gradient {
+            background: var(--card-gradient);
+      }
+
+      .tech-glow {
+            box-shadow: var(--tech-glow);
+      }
+
+      .animate-float {
+            animation: float 6s ease-in-out infinite;
+      }
+
+      .animate-slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+      }
+
+      .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+      }
+
+      .animate-scale-in {
+            animation: scaleIn 0.5s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.9);
+      }
+
+      @keyframes float {
+
+            0%,
+            100% {
+                  transform: translateY(0px);
+            }
+
+            50% {
+                  transform: translateY(-20px);
+            }
+      }
+
+      @keyframes slideUp {
+            to {
+                  opacity: 1;
+                  transform: translateY(0);
+            }
+      }
+
+      @keyframes fadeIn {
+            to {
+                  opacity: 1;
+            }
+      }
+
+      @keyframes scaleIn {
+            to {
+                  opacity: 1;
+                  transform: scale(1);
+            }
+      }
+
+      .skill-bar {
+            transition: width 1.5s ease-in-out;
+      }
+
+      .hover-lift {
+            transition: var(--transition-smooth);
+      }
+
+      .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--tech-glow);
+      }
+
+      .typing-animation {
+            border-right: 2px solid var(--color-primary);
+            animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+
+            0%,
+            50% {
+                  border-color: var(--color-primary);
+            }
+
+            51%,
+            100% {
+                  border-color: transparent;
+            }
+      }
+
+
+      @keyframes accordion-down {
+            from {
+                  height: 0;
+            }
+
+            to {
+                  height: var(--radix-accordion-content-height);
+            }
+      }
+
+      @keyframes accordion-up {
+            from {
+                  height: var(--radix-accordion-content-height);
+            }
+
+            to {
+                  height: 0;
+            }
+      }
+
+      .animate-accordion-down {
+            animation: accordion-down 0.2s ease-out;
+      }
+
+      .animate-accordion-up {
+            animation: accordion-up 0.2s ease-out;
       }
 }
