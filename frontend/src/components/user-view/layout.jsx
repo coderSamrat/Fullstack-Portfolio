@@ -5,7 +5,7 @@ import Footer from './footer';
 
 const MyPortfoliopageLayout = () => {
       return (
-            <div className='flex flex-col overflow-hidden bg-background gap-2'>
+            <div className='flex flex-col overflow-hidden bg-background'>
                   <MyPortfolioHeader />
                   <main className='flex flex-col w-full'>
                         <Outlet />
