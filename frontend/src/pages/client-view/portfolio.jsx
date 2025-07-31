@@ -195,12 +195,6 @@ const MyPortfolio = () => {
                               </div>
                         </div>
                   </section> */}
-
-                  {/* Contact Section */}
-                  {/* <MyContact formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />  */}
-
-                  {/* Footer */}
-                  {/* <Footer scrollToSection={scrollToSection} /> */}
             </div>
       );
 };

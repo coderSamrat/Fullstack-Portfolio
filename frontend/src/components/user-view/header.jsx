@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMobile } from '../common/useMobileHook';
 import { Mail, Menu, X } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { navigationMenu } from '@/config/menu';
 import { Button } from '../ui/button';
 
@@ -13,8 +13,16 @@ const Header = () => {
       const [showMenu, setShowMenu] = useState(false);
       const [isClosing, setIsClosing] = useState(false);
       const isMobile = useMobile();
+      const navigate = useNavigate();
 
       const ANIMATION_DURATION = 600;
+
+      const handleNavigateToContact = () => {
+            navigate('/portfolio/contact');
+            if (isMobile && isMenuOpen) {
+                  toggleMenu();
+            }
+      };
 
       const toggleMenu = () => {
             if (isMenuOpen) {
@@ -94,6 +102,7 @@ const Header = () => {
                                                       variant="outline"
                                                       size="lg"
                                                       className="hover:bg-primary/60 text-muted-foreground hover:text-white transition-colors duration-300 ease-out"
+                                                      onClick={handleNavigateToContact}
                                                 >
                                                       <Mail className="w-5 h-5 mr-2" />
                                                       Contact Me
@@ -128,6 +137,7 @@ const Header = () => {
                                           </div>
                                           <div className='flex items-center justify-center my-4'>
                                                 <Button
+                                                      onClick={handleNavigateToContact}
                                                       variant="outline"
                                                       size="lg"
                                                       className="hover:bg-primary/60 text-muted-foreground hover:text-white transition-colors duration-300 ease-out"

@@ -162,6 +162,16 @@
             background: transparent;
       }
 
+      .hide-number-arrows::-webkit-outer-spin-button,
+      .hide-number-arrows::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+      }
+
+      .hide-number-arrows {
+            -moz-appearance: textfield;
+      }
+
       .text-gradient {
             background: var(--text-gradient);
             background-clip: text;
@@ -236,6 +246,7 @@
                   opacity: 1;
                   transform: translateY(0);
             }
+
             to {
                   opacity: 0;
                   transform: translateY(-30px);

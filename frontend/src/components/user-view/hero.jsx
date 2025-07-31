@@ -4,7 +4,6 @@ import { Button } from '../ui/button';
 import { Download, Mail } from 'lucide-react';
 
 const Hero = ({
-      scrollToSection,
       heroImage,
       profileImage,
       skillTexts
@@ -45,8 +44,7 @@ const Hero = ({
                                     <Button
                                           variant="outline"
                                           size="lg"
-                                          onClick={() => scrollToSection("contact")}
-                                          className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out"
+                                          className="hover:bg-primary/60 text-muted-foreground hover:text-white transition-colors duration-300 ease-out"
                                     >
                                           <Mail className="w-5 h-5 mr-2" />
                                           Contact Me
