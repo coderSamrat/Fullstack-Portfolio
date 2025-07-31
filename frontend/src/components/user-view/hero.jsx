@@ -12,7 +12,7 @@ const Hero = ({
       return (
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
                   <div
-                        className="absolute inset-0 z-0 opacity-40"
+                        className="absolute inset-0 z-0 dark:opacity-50 opacity-10"
                         style={{
                               backgroundImage: `url(${heroImage})`,
                               backgroundSize: "cover",

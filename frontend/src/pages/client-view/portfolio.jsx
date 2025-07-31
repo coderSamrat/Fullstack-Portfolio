@@ -92,7 +92,7 @@ const MyPortfolio = () => {
       };
 
       return (
-            <div className="min-h-screen bg-background relative mt-16">
+            <div className="min-h-screen bg-background relative mt-20">
                   <Hero scrollToSection={scrollToSection} heroImage={heroImage} profileImage={profileImage} skillTexts={skillTexts} />
                   <Header scrollToSection={scrollToSection} />
 
