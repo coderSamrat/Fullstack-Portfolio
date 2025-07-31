@@ -16,7 +16,7 @@ const ProjectCard = ({
       return (
             <Card className="hover-lift card-gradient border-0 tech-glow group">
                   <CardHeader>
-                        <div className="flex justify-between items-start">
+                        <div className="flex justify-between items-start flex-wrap gap-2 mb-2">
                               <CardTitle className="text-xl group-hover:text-gradient transition-all duration-300">
                                     {title}
                               </CardTitle>

@@ -10,9 +10,9 @@ const Hero = ({
       skillTexts
 }) => {
       return (
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden ">
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
                   <div
-                        className="absolute inset-0 z-0 opacity-10"
+                        className="absolute inset-0 z-0 opacity-40"
                         style={{
                               backgroundImage: `url(${heroImage})`,
                               backgroundSize: "cover",
@@ -21,12 +21,12 @@ const Hero = ({
                   />
                   <div className="absolute inset-0 hero-gradient opacity-5 z-0" />
 
-                  <div className="container mx-auto px-4 z-10 text-center md:mt-0 mt-24">
+                  <div className="container mx-auto px-4 z-10 text-center py-4">
                         <div className="animate-fade-in">
                               <img
                                     src={profileImage}
                                     alt="Samrat Mallick"
-                                    className="w-60 h-60 rounded-full mx-auto mb-8 border-4 border-primary/20 animate-float"
+                                    className="w-56 h-56 rounded-full mx-auto mb-8 lg:mt-0 mt-6 border-4 border-primary/20 animate-float"
                               />
                               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
                                     Samrat Mallick

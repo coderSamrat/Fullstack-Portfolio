@@ -2,16 +2,11 @@ export const navigationMenu = [
       {
             name: 'home',
             label: 'Home',
-            path: '/home',
+            path: '/portfolio/home',
       },
       {
             name: 'projects',
             label: 'Projects',
-            path: '/projects',
+            path: '/portfolio/projects',
       },
-      {
-            name: 'pontact',
-            label: 'Contact',
-            path: '/contact',
-      }
 ];

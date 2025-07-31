@@ -92,12 +92,12 @@ const MyPortfolio = () => {
       };
 
       return (
-            <div className="min-h-screen bg-background relative">
+            <div className="min-h-screen bg-background relative mt-16">
                   <Hero scrollToSection={scrollToSection} heroImage={heroImage} profileImage={profileImage} skillTexts={skillTexts} />
                   <Header scrollToSection={scrollToSection} />
 
                   {/* About Section */}
-                  <section id="about" className="py-20 bg-muted/30">
+                  {/* <section id="about" className="py-20 bg-muted/30">
                         <div className="container mx-auto px-4">
                               <div className="max-w-4xl mx-auto text-center">
                                     <h2 className="text-4xl font-bold mb-8 text-gradient animate-slide-up">About Me</h2>
@@ -119,10 +119,10 @@ const MyPortfolio = () => {
                                     </div>
                               </div>
                         </div>
-                  </section>
+                  </section> */}
 
                   {/* Skills Section */}
-                  <section id="skills" className="py-20">
+                  {/* <section id="skills" className="py-20">
                         <div className="container mx-auto px-4">
                               <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Skills & Technologies</h2>
                               <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -137,10 +137,10 @@ const MyPortfolio = () => {
                                     </div>
                               </div>
                         </div>
-                  </section>
+                  </section> */}
 
                   {/* Projects Section */}
-                  <section id="projects" className="py-20 bg-muted/30">
+                  {/* <section id="projects" className="py-20 bg-muted/30">
                         <div className="container mx-auto px-4">
                               <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Featured Projects</h2>
                               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -155,10 +155,10 @@ const MyPortfolio = () => {
                                     ))}
                               </div>
                         </div>
-                  </section>
+                  </section> */}
 
                   {/* Training & Education Section */}
-                  <section id="education" className="py-20">
+                  {/* <section id="education" className="py-20">
                         <div className="container mx-auto px-4">
                               <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Training & Education</h2>
                               <div className="max-w-4xl mx-auto space-y-8">
@@ -194,13 +194,13 @@ const MyPortfolio = () => {
                                     </Card>
                               </div>
                         </div>
-                  </section>
+                  </section> */}
 
                   {/* Contact Section */}
-                  <MyContact formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
+                  {/* <MyContact formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />  */}
 
                   {/* Footer */}
-                  <Footer scrollToSection={scrollToSection} />
+                  {/* <Footer scrollToSection={scrollToSection} /> */}
             </div>
       );
 };
