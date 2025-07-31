@@ -22,6 +22,9 @@ const Header = () => {
             if (isMobile && isMenuOpen) {
                   toggleMenu();
             }
+            setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 50);
       };
 
       const toggleMenu = () => {
@@ -57,7 +60,7 @@ const Header = () => {
       }, [isMenuOpen, isMobile]);
 
       return (
-            <header className='w-full border-b bg-background/60 backdrop-blur-sm fixed left-0 right-0 top-0 z-50'>
+            <header className='w-full border-b bg-background/20 backdrop-blur-sm fixed left-0 right-0 top-0 z-50'>
                   <div className='container mx-auto flex items-center justify-between h-20 px-4 md:px-6'>
                         <Link to={'/'} className='flex items-end select-none'>
                               <span className='text-5xl font-bold text-green-600'>S</span>

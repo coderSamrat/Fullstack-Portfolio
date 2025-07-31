@@ -4,7 +4,7 @@ import { backendSkills, frontendSkills, tools } from '@/config/skills';
 
 const MySkills = () => {
       return (
-            <section id="skills" className="py-20">
+            <section id="skills" className="py-20 bg-muted/30">
                   <div className="container mx-auto px-4">
                         <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Skills & Technologies</h2>
                         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">

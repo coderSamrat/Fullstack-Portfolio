@@ -11,7 +11,7 @@ const MyProjects = () => {
             navigate('/portfolio/projects');
       };
       return (
-            <section id="projects" className="py-20 bg-muted/30">
+            <section id="projects" className="py-20">
                   <div className="container mx-auto px-4 flex flex-col items-center gap-4">
                         <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Featured Projects</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
