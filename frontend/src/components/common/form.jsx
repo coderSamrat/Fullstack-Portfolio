@@ -35,8 +35,6 @@ const CommonForm = ({
                               <Input
                                     {...commonProps}
                                     type={getControlItems.type}
-                                    min={getControlItems.type === 'number' ? 0 : undefined}
-                                    max={getControlItems.type === 'number' ? 9999999999 : undefined}
                                     className={`${getControlItems.type === 'number' ? 'hide-number-arrows' : ''}`}
                               />
                         );
