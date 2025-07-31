@@ -1,13 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import AnimatedText from './animated-text';
 import { Button } from '../ui/button';
-import { Download, Mail } from 'lucide-react';
+import { Download } from 'lucide-react';
+import ContactMeBtn from './contact-btn';
 
 const Hero = ({
       heroImage,
       profileImage,
-      skillTexts
+      skillTexts,
 }) => {
+      const navigate = useNavigate();
+      const handleContactClick = () => {
+            window.scrollTo(0, 0);
+            navigate('/portfolio/contact');
+      };
       return (
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-4">
                   <div
@@ -37,18 +44,18 @@ const Hero = ({
                                     Passionate Full Stack Developer crafting innovative web solutions with modern technologies
                               </p>
                               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                                    <Button size="lg" className="hero-gradient text-muted hover:opacity-90 accent-glow">
-                                          <Download className="w-5 h-5 mr-2" />
-                                          Download Resume
-                                    </Button>
-                                    <Button
-                                          variant="outline"
-                                          size="lg"
-                                          className="hover:bg-primary/60 text-muted-foreground hover:text-white transition-colors duration-300 ease-out"
+                                    <a
+                                          href="/resume.pdf"
+                                          download
+                                          target="_blank"
+                                          rel="noopener noreferrer"
                                     >
-                                          <Mail className="w-5 h-5 mr-2" />
-                                          Contact Me
-                                    </Button>
+                                          <Button size="lg" className="hero-gradient text-muted hover:opacity-90 accent-glow">
+                                                <Download className="w-5 h-5 mr-2" />
+                                                Download Resume
+                                          </Button>
+                                    </a>
+                                    <ContactMeBtn handleNavigateToContact={handleContactClick} />
                               </div>
                         </div>
                   </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useMobile } from '../common/useMobileHook';
-import { Mail, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { navigationMenu } from '@/config/menu';
-import { Button } from '../ui/button';
+import ContactMeBtn from './contact-btn';
 
 
 
@@ -98,15 +98,7 @@ const Header = () => {
                                                 }
                                           </div>
                                           <div className='flex items-center gap-8'>
-                                                <Button
-                                                      variant="outline"
-                                                      size="lg"
-                                                      className="hover:bg-primary/60 text-muted-foreground hover:text-white transition-colors duration-300 ease-out"
-                                                      onClick={handleNavigateToContact}
-                                                >
-                                                      <Mail className="w-5 h-5 mr-2" />
-                                                      Contact Me
-                                                </Button>
+                                                <ContactMeBtn handleNavigateToContact={handleNavigateToContact} />
                                                 <ThemeToggle />
                                           </div>
                                     </div>
@@ -136,15 +128,7 @@ const Header = () => {
                                                 }
                                           </div>
                                           <div className='flex items-center justify-center my-4'>
-                                                <Button
-                                                      onClick={handleNavigateToContact}
-                                                      variant="outline"
-                                                      size="lg"
-                                                      className="hover:bg-primary/60 text-muted-foreground hover:text-white transition-colors duration-300 ease-out"
-                                                >
-                                                      <Mail className="w-5 h-5 mr-2" />
-                                                      Contact Me
-                                                </Button>
+                                                <ContactMeBtn handleNavigateToContact={handleNavigateToContact} />
                                           </div>
                                     </div>
                               )

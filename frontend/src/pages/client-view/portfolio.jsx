@@ -13,12 +13,10 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
 import profileImage from "@/assets/profileimage.jpeg";
-import Footer from "@/components/user-view/footer";
-import Header from "@/components/user-view/header";
 import SkillCard from "@/components/user-view/skill-card";
 import ProjectCard from "@/components/user-view/project-card";
-import MyContact from "@/components/user-view/contact";
 import Hero from "@/components/user-view/hero";
+import AboutMe from "@/components/user-view/about";
 
 const MyPortfolio = () => {
       const [formData, setFormData] = useState({
@@ -79,47 +77,13 @@ const MyPortfolio = () => {
             }
       ];
 
-      const handleSubmit = (e) => {
-            e.preventDefault();
-            console.log("Form submitted:", formData);
-      };
-
-      const scrollToSection = (id) => {
-            const el = document.getElementById(id);
-            if (el) {
-                  el.scrollIntoView({ behavior: "smooth" });
-            }
-      };
-
       return (
             <div className="min-h-screen bg-background relative mt-20">
-                  <Hero scrollToSection={scrollToSection} heroImage={heroImage} profileImage={profileImage} skillTexts={skillTexts} />
-                  <Header scrollToSection={scrollToSection} />
+                  <Hero heroImage={heroImage} profileImage={profileImage} skillTexts={skillTexts} />
+                  {/* <Header scrollToSection={scrollToSection} /> */}
 
                   {/* About Section */}
-                  {/* <section id="about" className="py-20 bg-muted/30">
-                        <div className="container mx-auto px-4">
-                              <div className="max-w-4xl mx-auto text-center">
-                                    <h2 className="text-4xl font-bold mb-8 text-gradient animate-slide-up">About Me</h2>
-                                    <div className="prose prose-lg mx-auto text-muted-foreground leading-relaxed animate-slide-up">
-                                          <p className="mb-6">
-                                                I'm a passionate Full Stack Web Developer with a strong foundation in modern web technologies.
-                                                Currently pursuing my B.Tech degree, I combine academic knowledge with practical experience
-                                                to create innovative and efficient web solutions.
-                                          </p>
-                                          <p className="mb-6">
-                                                My journey in web development began with a curiosity for how websites work, which quickly
-                                                evolved into a deep passion for creating user-friendly applications. I specialize in the
-                                                MERN stack and love bringing ideas to life through clean, maintainable code.
-                                          </p>
-                                          <p>
-                                                When I'm not coding, you'll find me exploring new technologies, contributing to open-source
-                                                projects, or working on exciting personal projects that challenge my skills and creativity.
-                                          </p>
-                                    </div>
-                              </div>
-                        </div>
-                  </section> */}
+                  <AboutMe />
 
                   {/* Skills Section */}
                   {/* <section id="skills" className="py-20">
