@@ -1,6 +1,6 @@
 import React from 'react';
 import SkillCard from './skill-card';
-import { backendSkills, frontendSkills, tools } from '@/config/skills';
+import { backendSkills, frontendSkills, tools } from '@/config/skillsindex';
 
 const MySkills = () => {
       return (
