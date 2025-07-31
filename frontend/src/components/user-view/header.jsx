@@ -65,7 +65,7 @@ const Header = () => {
                         </Link>
                         {
                               isMobile && (
-                                    <div className="flex items-center justify-between md:hidden">
+                                    <div className="flex items-center justify-between lg:hidden">
                                           <div className="flex items-center justify-between gap-2">
                                                 <ThemeToggle />
                                                 <button

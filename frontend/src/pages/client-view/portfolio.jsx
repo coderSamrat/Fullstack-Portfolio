@@ -13,10 +13,11 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
 import profileImage from "@/assets/profileimage.jpeg";
-import SkillCard from "@/components/user-view/skill-card";
 import ProjectCard from "@/components/user-view/project-card";
 import Hero from "@/components/user-view/hero";
 import AboutMe from "@/components/user-view/about";
+import MySkills from "@/components/user-view/skill";
+import MyProjects from "@/components/user-view/projects";
 
 const MyPortfolio = () => {
       const [formData, setFormData] = useState({
@@ -33,49 +34,7 @@ const MyPortfolio = () => {
             "Tailwind CSS Designer"
       ];
 
-      const frontendSkills = [
-            { name: "ReactJS", level: 90, icon: <Code2 className="w-5 h-5 text-blue-500" /> },
-            { name: "JavaScript", level: 85, icon: <Terminal className="w-5 h-5 text-yellow-500" /> },
-            { name: "HTML/CSS", level: 95, icon: <Palette className="w-5 h-5 text-orange-500" /> },
-            { name: "Tailwind CSS", level: 88, icon: <Palette className="w-5 h-5 text-cyan-500" /> }
-      ];
-
-      const backendSkills = [
-            { name: "NodeJS", level: 85, icon: <Server className="w-5 h-5 text-green-500" /> },
-            { name: "ExpressJS", level: 82, icon: <Server className="w-5 h-5 text-gray-500" /> },
-            { name: "MongoDB", level: 80, icon: <Database className="w-5 h-5 text-green-600" /> },
-            { name: "Java", level: 75, icon: <Coffee className="w-5 h-5 text-red-500" /> }
-      ];
-
-      const tools = [
-            { name: "Git", level: 85, icon: <Terminal className="w-5 h-5 text-orange-500" /> },
-            { name: "VSCode", level: 90, icon: <Code2 className="w-5 h-5 text-blue-600" /> },
-            { name: "C Programming", level: 78, icon: <Terminal className="w-5 h-5 text-gray-600" /> }
-      ];
-
-      const projects = [
-            {
-                  title: "MyPortfolio Website",
-                  description: "A responsive personal Myportfolio showcasing my skills and projects, built with modern React practices and beautiful animations.",
-                  technologies: ["ReactJS", "Tailwind CSS", "TypeScript", "shadcn/ui"],
-                  githubUrl: "#",
-                  liveUrl: "#"
-            },
-            {
-                  title: "Abar Khabo",
-                  description: "AI-powered food delivery platform with intelligent recommendations and seamless ordering experience.",
-                  technologies: ["ReactJS", "NodeJS", "MongoDB", "AI/ML", "Express"],
-                  githubUrl: "#",
-                  status: "In Progress"
-            },
-            {
-                  title: "SM-Collection",
-                  description: "Modern e-commerce platform for clothing with advanced search, filters, and secure payment integration.",
-                  technologies: ["ReactJS", "NodeJS", "MongoDB", "Stripe", "Tailwind"],
-                  githubUrl: "#",
-                  status: "In Progress"
-            }
-      ];
+      
 
       return (
             <div className="min-h-screen bg-background relative mt-20">
@@ -86,40 +45,10 @@ const MyPortfolio = () => {
                   <AboutMe />
 
                   {/* Skills Section */}
-                  {/* <section id="skills" className="py-20">
-                        <div className="container mx-auto px-4">
-                              <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Skills & Technologies</h2>
-                              <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                                    <div className="animate-slide-up">
-                                          <SkillCard title="Frontend Development" skills={frontendSkills} />
-                                    </div>
-                                    <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
-                                          <SkillCard title="Backend Development" skills={backendSkills} />
-                                    </div>
-                                    <div className="animate-slide-up" style={{ animationDelay: "0.4s" }}>
-                                          <SkillCard title="Tools & Others" skills={tools} />
-                                    </div>
-                              </div>
-                        </div>
-                  </section> */}
+                  <MySkills />
 
                   {/* Projects Section */}
-                  {/* <section id="projects" className="py-20 bg-muted/30">
-                        <div className="container mx-auto px-4">
-                              <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Featured Projects</h2>
-                              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                                    {projects.map((project, index) => (
-                                          <div
-                                                key={index}
-                                                className="animate-slide-up"
-                                                style={{ animationDelay: `${index * 0.2}s` }}
-                                          >
-                                                <ProjectCard {...project} />
-                                          </div>
-                                    ))}
-                              </div>
-                        </div>
-                  </section> */}
+                  <MyProjects />
 
                   {/* Training & Education Section */}
                   {/* <section id="education" className="py-20">

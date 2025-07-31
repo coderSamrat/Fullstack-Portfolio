@@ -46,12 +46,12 @@ const ProjectCard = ({
                                     </Link>
                               )}
                               {liveUrl && (
-                                    <a href={liveUrl} target="_blank" rel="noopener noreferrer">
+                                    <Link to={liveUrl} target="_blank" rel="noopener noreferrer">
                                           <Button size="sm" className="hero-gradient text-muted hover:opacity-90 accent-glow">
                                                 <ExternalLink className="w-4 h-4 mr-2" />
                                                 Live Demo
                                           </Button>
-                                    </a>
+                                    </Link>
                               )}
                         </div>
                   </CardContent>
