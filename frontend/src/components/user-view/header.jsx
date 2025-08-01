@@ -109,7 +109,7 @@ const Header = () => {
                         }
                         {
                               isMobile && showMenu && (
-                                    <div className={`absolute left-0 top-full w-full bg-background/95 shadow-lg border-b 
+                                    <div className={`absolute left-0 top-full w-full bg-background/80 shadow-lg border-b
                                           ${isMenuOpen && !isClosing ? 'animate-slide-up' : ''}
                                           ${!isMenuOpen && isClosing ? 'animate-slide-down' : ''}
                                           z-50`}

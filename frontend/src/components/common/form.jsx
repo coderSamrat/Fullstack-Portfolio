@@ -42,7 +42,8 @@ const CommonForm = ({
                         return (
                               <Textarea
                                     {...commonProps}
-                                    rows={getControlItems.rows || 3}
+                                    rows={getControlItems.rows}
+                                    className={'resize-none'}
                               />
                         );
                   default:
@@ -57,7 +58,7 @@ const CommonForm = ({
 
       return (
             <form onSubmit={onSubmit} className='space-y-4'>
-                  <div className='flex flex-col gap-3'>
+                  <div className='flex flex-col gap-6'>
                         {
                               formControls.map((controlItems) => (
                                     <div
@@ -71,7 +72,7 @@ const CommonForm = ({
                               ))
                         }
                   </div>
-                  <Button type="submit" className="w-full hero-gradient text-muted hover:opacity-90">
+                  <Button type="submit" className="w-full hero-gradient text-muted hover:opacity-90 mt-8">
                         {buttonText || 'Submit'}
                   </Button>
             </form>

@@ -1,9 +1,13 @@
 import CommonForm from '@/components/common/form';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import ContactDetail from '@/components/user-view/contact-details';
 import { contactFormIndex } from '@/config/allFormIndex';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Facebook, Github, Instagram, Linkedin, Mail } from 'lucide-react';
 import React, { useState } from 'react';
+import profileImage from '@/assets/profileimage.jpeg';
+import { conatct } from '@/config/contactDetails';
+import { Link } from 'react-router-dom';
 
 const intialFormData = {
       name: '',
@@ -18,61 +22,62 @@ const MyContact = () => {
             console.log('Form submitted with data:', formData);
       };
       return (
-            <section id="contact" className="py-20 bg-muted/30 mt-16">
-                  <div className="container mx-auto md:px-4">
-                        <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Get In Touch</h2>
-                        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
-                              {/* Contact Form */}
-                              <Card className="hover-lift card-gradient border-0 tech-glow">
-                                    <CardHeader>
-                                          <CardTitle>Send Me a Message</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                          <CommonForm 
-                                                formControls={contactFormIndex}
-                                                formData={formData}
-                                                setFormData={setFormData}
-                                                onSubmit={handleSubmit}
-                                                buttonText="Send Message"
-                                          />
-                                    </CardContent>
-                              </Card>
-
-                              {/* Contact Info */}
-                              <div className="space-y-8">
-                                    <Card className="hover-lift card-gradient border-0 tech-glow">
-                                          <CardHeader>
-                                                <CardTitle>Connect With Me</CardTitle>
+            <section id="contact" className="py-20 bg-muted/30 mt-10">
+                  <div className="container mx-auto px-4">
+                        <div className="w-full flex lg:flex-row flex-col items-center gap-4">
+                              <h2 className="text-5xl font-bold text-center text-gradient">Get In Touch</h2>
+                              <div className="w-44 h-1 bg-gradient-to-l from-primary to-secondary rounded-lg flex order-last lg:mt-10 mt-0"></div>
+                        </div>
+                        <div className='w-full flex flex-col md:flex-row items-center gap-4 mt-8'>
+                              <div className='md:w-1/2 w-full flex flex-col items-center justify-center gap-8'>
+                                    <img src={profileImage} alt="Samrat Mallick" className="w-40 h-40 rounded-full mx-auto border-4 border-primary/20" />
+                                    <Card className="hover-lift border-0 tech-glow">
+                                          <CardHeader className="text-center text-3xl font-bold text-gradient">
+                                                <CardTitle>Connect & Location</CardTitle>
                                           </CardHeader>
                                           <CardContent className="space-y-4">
-                                                <div className="flex items-center flex-wrap space-x-4">
-                                                      <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
-                                                            <Github className="w-5 h-5 mr-2" />
-                                                            GitHub
-                                                      </Button>
-                                                      <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
-                                                            <Linkedin className="w-5 h-5 mr-2" />
-                                                            LinkedIn
-                                                      </Button>
-                                                </div>
-                                                <div className="flex items-center space-x-2 text-muted-foreground">
-                                                      <Mail className="w-5 h-5" />
-                                                      <span>samratmallick@email.com</span>
-                                                </div>
+                                                {
+                                                      conatct.map((contact, index) => (
+                                                            <ContactDetail key={index} label={contact.label} value={
+                                                                  <Link to={contact.link} target="_blank" rel="noopener noreferrer">{contact.value}</Link>
+                                                            } />
+                                                      ))
+                                                }
                                           </CardContent>
+                                          <CardFooter className={'flex items-center gap-4 flex-wrap'}>
+                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                      <Facebook className="w-5 h-5 mr-2" />
+                                                      Facebook
+                                                </Button>
+                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                      <Instagram className="w-5 h-5 mr-2" />
+                                                      Instagram
+                                                </Button>
+                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                      <Github className="w-5 h-5 mr-2" />
+                                                      GitHub
+                                                </Button>
+                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                      <Linkedin className="w-5 h-5 mr-2" />
+                                                      LinkedIn
+                                                </Button>
+                                          </CardFooter>
                                     </Card>
 
-                                    <Card className="hover-lift card-gradient border-0 tech-glow">
-                                          <CardHeader>
-                                                <CardTitle>Location</CardTitle>
+                              </div>
+                              <div className='md:w-1/2 w-full flex items-center justify-center'>
+                                    <Card className="hover-lift bg-background/30 border-0 tech-glow w-full max-w-lg flex flex-col p-4 md:p-6 lg:p-8">
+                                          <CardHeader className="text-2xl font-semibold">
+                                                <CardTitle>Send Me a Message</CardTitle>
                                           </CardHeader>
                                           <CardContent>
-                                                <p className="text-muted-foreground">
-                                                      Banbania, Habra<br />
-                                                      North 24 Parganas<br />
-                                                      West Bengal, 743263<br />
-                                                      India
-                                                </p>
+                                                <CommonForm
+                                                      formControls={contactFormIndex}
+                                                      formData={formData}
+                                                      setFormData={setFormData}
+                                                      onSubmit={handleSubmit}
+                                                      buttonText="Send Message"
+                                                />
                                           </CardContent>
                                     </Card>
                               </div>
