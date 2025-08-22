@@ -18,14 +18,14 @@ const Hero = ({
       return (
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-4">
                   <div
-                        className="absolute inset-0 z-0 dark:opacity-90 opacity-30"
+                        className="absolute inset-0 z-0 dark:opacity-90 opacity-5"
                         style={{
                               backgroundImage: `url(${heroImage})`,
                               backgroundSize: "cover",
                               backgroundPosition: "center"
                         }}
                   />
-                  <div className="absolute inset-0 hero-gradient opacity-5 z-0" />
+                  <div className="absolute inset-0 hero-gradient opacity-40 z-0" />
 
                   <div className="container mx-auto px-4 z-10 text-center">
                         <div className="animate-fade-in">

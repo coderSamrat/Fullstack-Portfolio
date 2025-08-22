@@ -2,7 +2,7 @@ export const projects = [
       {
             title: "MyPortfolio Website",
             description: "A responsive personal Myportfolio showcasing my skills and projects, built with modern React practices and beautiful animations.",
-            technologies: ["ReactJS", "Tailwind CSS", "TypeScript", "shadcn/ui"],
+            technologies: ["ReactJS", "Tailwind CSS", "JavaScript", "shadcn/ui"],
             githubUrl: "#",
             liveUrl: "#"
       },

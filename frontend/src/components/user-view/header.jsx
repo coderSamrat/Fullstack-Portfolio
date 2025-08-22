@@ -72,7 +72,7 @@ const Header = () => {
                                           <div className="flex items-center justify-between gap-2">
                                                 <ThemeToggle />
                                                 <button
-                                                      className="text-muted-foreground hover:text-primary focus:outline-none"
+                                                      className="text-muted-foreground hover:text-primary focus:outline-none cursor-pointer"
                                                       onClick={toggleMenu}
                                                       aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                                                 >

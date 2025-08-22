@@ -12,7 +12,7 @@ const MyEducation = () => {
                         <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Training & Education</h2>
                         <div className="max-w-4xl mx-auto space-y-8">
                               {myEducationAndTraining.map((item, index) => (
-                                    <Card key={index} className="hover-lift card-gradient border-0 tech-glow">
+                                    <Card key={index} className="hover-lift card-gradient border-0 tech-glow animate-slide-up" style={{ animationDelay: `${index * 0.2}s` }}>
                                           <CardHeader>
                                                 <CardTitle className="flex items-center justify-between">
                                                       <span>{item.title}</span>
