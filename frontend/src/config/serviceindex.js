@@ -1,11 +1,8 @@
-import { Layers, Monitor, Palette, Server } from "lucide-react";
-
-
 export const services = [
       {
             title: "Web Designing",
             description: "Creating visually appealing and user-friendly website designs",
-            icon: <Palette className="w-8 h-8 text-primary" />,
+            Icon: "Palette",
             features: [
                   "UI/UX Design",
                   "Responsive Layouts",
@@ -16,7 +13,7 @@ export const services = [
       {
             title: "Frontend Development",
             description: "Building interactive and responsive user interfaces",
-            icon: <Monitor className="w-8 h-8 text-primary" />,
+            Icon: "Monitor",
             features: [
                   "ReactJS Development",
                   "JavaScript ES6+",
@@ -27,7 +24,7 @@ export const services = [
       {
             title: "Backend Development",
             description: "Developing robust server-side applications and APIs",
-            icon: <Server className="w-8 h-8 text-primary" />,
+            Icon: "Server",
             features: [
                   "NodeJS & Express",
                   "RESTful APIs",
@@ -38,7 +35,7 @@ export const services = [
       {
             title: "MERN Stack Development",
             description: "Full-stack web applications using MongoDB, Express, React, and Node.js",
-            icon: <Layers className="w-8 h-8 text-primary" />,
+            Icon: "Layers",
             features: [
                   "Complete Web Apps",
                   "Real-time Features",
