@@ -13,6 +13,10 @@ const heroSchema = new mongoose.Schema(
             title: {
                   type: [String],
                   required: true,
+                  validate: [
+                        (arr) => Array.isArray(arr) && arr.every(t => typeof t === 'string'),
+                        'Title must be an array of strings.'
+                  ]
             },
             description: {
                   type: String,
