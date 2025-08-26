@@ -63,7 +63,9 @@ export const getHeroContent = asyncHandler(async (req, res) => {
                   new ApiResponse(200, heroContent, "Hero content fetched successfully.")
             );
       } catch (error) {
-            console.error("Error in getHeroContent:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw error;
+            }
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });

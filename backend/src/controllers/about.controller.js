@@ -6,45 +6,71 @@ import { uploadImageOnCloudinary } from "../utilities/cloudinary.config.js";
 import { processParagraphs } from "../utilities/split.helper.js";
 
 export const addAndUpdateAboutContent = asyncHandler(async (req, res) => {
-      const { paragraphs } = req.body;
-      const imageFile = req.file;
+      try {
+            const { paragraphs } = req.body;
+            const imageFile = req.file;
 
-      const dataToSave = {};
+            const dataToSave = {};
 
-      if (imageFile) {
-            const uploadResult = await uploadImageOnCloudinary(imageFile);
-            if (!uploadResult?.secure_url) {
-                  throw new ApiError(500, "Failed to upload image to Cloudinary.");
+            if (imageFile) {
+                  const uploadResult = await uploadImageOnCloudinary(imageFile);
+                  if (!uploadResult?.secure_url) {
+                        throw new ApiError(500, "Failed to upload image to Cloudinary.");
+                  }
+                  dataToSave.aboutImage = uploadResult?.secure_url;
             }
-            dataToSave.aboutImage = uploadResult?.secure_url;
+
+            if (paragraphs) {
+                  dataToSave.paragraphs = processParagraphs(paragraphs);
+            }
+
+            let aboutContent = await AboutModel.findOne();
+            let wasCreated = false;
+
+            if (aboutContent) {
+                  aboutContent = await AboutModel.findByIdAndUpdate(
+                        aboutContent._id,
+                        { $set: dataToSave },
+                        { new: true, runValidators: true }
+                  );
+            } else {
+                  aboutContent = await AboutModel.create(dataToSave);
+                  wasCreated = true;
+            }
+
+            if (!aboutContent) {
+                  throw new ApiError(500, "Failed to save the 'About' content.");
+            }
+
+            const statusCode = wasCreated ? 201 : 200;
+            const message = wasCreated
+                  ? "About content added successfully."
+                  : "About content updated successfully.";
+
+            return res.status(statusCode).json(new ApiResponse(statusCode, aboutContent, message));
+      } catch (error) {
+            if (error instanceof ApiError) {
+                  throw error;
+            }
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
+});
 
-      if (paragraphs) {
-            dataToSave.paragraphs = processParagraphs(paragraphs);
-      }
+export const getAboutContent = asyncHandler(async (req, res) => {
+      try {
+            const aboutContent = await AboutModel.findOne();
 
-      let aboutContent = await AboutModel.findOne();
-      let wasCreated = false;
+            if (!aboutContent) {
+                  throw new ApiError(404, "'About' content not found.");
+            }
 
-      if (aboutContent) {
-            aboutContent = await AboutModel.findByIdAndUpdate(
-                  aboutContent._id,
-                  { $set: dataToSave },
-                  { new: true, runValidators: true }
+            return res.status(200).json(
+                  new ApiResponse(200, aboutContent, "'About' content retrieved successfully.")
             );
-      } else {
-            aboutContent = await AboutModel.create(dataToSave);
-            wasCreated = true;
+      } catch (error) {
+            if (error instanceof ApiError) {
+                  throw error;
+            }
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
-
-      if (!aboutContent) {
-            throw new ApiError(500, "Failed to save the 'About' content.");
-      }
-
-      const statusCode = wasCreated ? 201 : 200;
-      const message = wasCreated
-            ? "About content added successfully."
-            : "About content updated successfully.";
-
-      return res.status(statusCode).json(new ApiResponse(statusCode, aboutContent, message));
 });

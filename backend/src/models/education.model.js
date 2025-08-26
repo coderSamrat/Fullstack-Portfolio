@@ -4,25 +4,28 @@ const educationSchema = new mongoose.Schema(
       {
             title: {
                   type: String,
-                  required: true,
+                  required: [true, "Title is required."],
+                  trim: true,
             },
             description: {
                   type: String,
-                  required: true,
             },
             certification: {
                   type: Boolean,
-                  required: true,
+                  default: false,
             },
             certificateLink: {
                   type: String,
-                  required: true,
+                  trim: true,
             },
             date: {
                   type: String,
-                  required: true,
+                  trim: true,
             },
-      }, { timestamps: true }
+      },
+      {
+            timestamps: true 
+      }
 );
 
 export const EducationModel = mongoose.model('Education', educationSchema);
