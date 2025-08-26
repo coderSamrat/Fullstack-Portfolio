@@ -1,139 +1,69 @@
 import { HeroModel } from "../models/hero.model.js";
+import { ApiError } from "../utilities/ApiError.js";
+import { ApiResponse } from "../utilities/ApiResponse.js";
 import { asyncHandler } from "../utilities/asyncHandler.js";
 import { uploadImageOnCloudinary } from "../utilities/cloudinary.config.js";
+import { processTitles } from "../utilities/split.helper.js";
 
-const processTitles = (title) => {
-      if (Array.isArray(title)) {
-            return title.filter(Boolean);
-      }
-      if (typeof title === 'string') {
+export const addAndUpdateHeroContent = asyncHandler(async (req, res) => {
+      const { name, title, description, resumeLink } = req.body;
+      const imageFile = req.file;
 
-            return title.split(',').map(t => t.trim()).filter(Boolean);
-      }
-      return [];
-};
+      const dataToSave = {};
 
-export const addHeroContent = asyncHandler(async (req, res) => {
-      try {
-            const { name, title, description, resumeLink } = req.body;
-      
-            if (!name || !title || !description || !resumeLink) {
-                  return res.status(400).json({
-                        message: "Name, title, description, and resumeLink are required.",
-                        success: false,
-                  });
+      if (name) dataToSave.name = name;
+      if (description) dataToSave.description = description;
+      if (resumeLink) dataToSave.resumeLink = resumeLink;
+      if (title) dataToSave.title = processTitles(title);
+
+      if (imageFile) {
+            const uploadResult = await uploadImageOnCloudinary(imageFile);
+            if (!uploadResult?.secure_url) {
+                  throw new ApiError(500, "Failed to upload profile image.");
             }
-            const image = req.file;
-            if (!image) {
-                  return res.status(400).json({
-                        message: "Profile image is required.",
-                        success: false,
-                  });
-            }
-      
-            const existingContent = await HeroModel.findOne();
-            if (existingContent) {
-                  return res.status(409).json({
-                        message: "Hero content already exists. Please use the update route instead.",
-                        success: false,
-                  });
-            }
-      
-            const uploadImage = await uploadImageOnCloudinary(image);
-            if (!uploadImage?.secure_url) {
-                  return res.status(500).json({ message: "Failed to upload image.", success: false });
-            }
-      
-            const titlesArray = processTitles(title);
-      
-            const heroContent = await HeroModel.create({
-                  name,
-                  title: titlesArray,
-                  description,
-                  resumeLink,
-                  profileImage: uploadImage?.secure_url,
-            });
-      
-            return res.status(201).json({
-                  message: "Hero content added successfully.",
-                  success: true,
-                  data: heroContent
-            });
-      } catch (error) {
-            return res.status(500).json({
-                  message: "Internal Server Error",
-                  success: false,
-                  error: error.message
-            });
+            dataToSave.profileImage = uploadResult.secure_url;
       }
+
+      let heroContent = await HeroModel.findOne();
+      let wasCreated = false;
+
+      if (heroContent) {
+            heroContent = await HeroModel.findByIdAndUpdate(
+                  heroContent._id,
+                  { $set: dataToSave },
+                  { new: true, runValidators: true }
+            );
+      } else {
+            heroContent = await HeroModel.create(dataToSave);
+            wasCreated = true;
+      }
+
+      if (!heroContent) {
+            throw new ApiError(500, "Failed to save the hero content.");
+      }
+
+      const statusCode = wasCreated ? 201 : 200;
+      const message = wasCreated
+            ? "Hero content added successfully."
+            : "Hero content updated successfully.";
+
+      return res.status(statusCode).json(new ApiResponse(statusCode, heroContent, message));
 });
 
 export const getHeroContent = asyncHandler(async (req, res) => {
       try {
             const heroContent = await HeroModel.findOne();
-      
-            if (!heroContent) {
-                  return res.status(404).json({
-                        message: "Hero content not found.",
-                        success: false,
-                  });
-            }
-      
-            return res.status(200).json({
-                  message: "Hero content fetched successfully.",
-                  success: true,
-                  data: heroContent
-            });
-      } catch (error) {
-            return res.status(500).json({
-                  message: "Internal Server Error",
-                  success: false,
-                  error: error.message
-            });
-      }
-});
 
-export const updateHeroContent = asyncHandler(async (req, res) => {
-      try {
-            const { name, title, description, resumeLink } = req.body;
-      
-            const existingHeroContent = await HeroModel.findOne();
-            if (!existingHeroContent) {
-                  return res.status(404).json({
-                        message: "Hero content not found. Please add content before updating.",
-                        success: false,
-                  });
+            if (!heroContent) {
+                  throw new ApiError(404, "Hero content not found.");
+
             }
-      
-            const updateData = {};
-            if (name) updateData.name = name;
-            if (description) updateData.description = description;
-            if (resumeLink) updateData.resumeLink = resumeLink;
-            if (title) updateData.title = processTitles(title);
-            const image = req.file;
-            if (image) {
-                  const uploadImage = await uploadImageOnCloudinary(image);
-                  if (!uploadImage?.secure_url) {
-                        return res.status(500).json({ message: "Failed to upload new image.", success: false });
-                  }
-                  updateData.profileImage = uploadImage?.secure_url;
-            }
-            const updatedHeroContent = await HeroModel.findByIdAndUpdate(
-                  existingHeroContent._id,
-                  { $set: updateData },
-                  { new: true, runValidators: true }
+
+            return res.status(200).json(
+                  new ApiResponse(200, heroContent, "Hero content fetched successfully.")
             );
-      
-            return res.status(200).json({
-                  message: "Hero content updated successfully.",
-                  success: true,
-                  data: updatedHeroContent
-            });
       } catch (error) {
-            return res.status(500).json({
-                  message: "Internal Server Error",
-                  success: false,
-                  error: error.message
-            });
+            console.error("Error in getHeroContent:", error);
+            throw new ApiError(500, "Internal Server Error", [error.message]);
       }
 });

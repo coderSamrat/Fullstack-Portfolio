@@ -1,66 +1,50 @@
 import { AboutModel } from "../models/about.model.js";
+import { ApiError } from "../utilities/ApiError.js";
+import { ApiResponse } from "../utilities/ApiResponse.js";
 import { asyncHandler } from "../utilities/asyncHandler.js";
 import { uploadImageOnCloudinary } from "../utilities/cloudinary.config.js";
+import { processParagraphs } from "../utilities/split.helper.js";
 
-export const addAboutContent = asyncHandler(async (req, res) => {
-      try {
-            let { paragraphs } = req.body;
-            const image = req.file;
+export const addAndUpdateAboutContent = asyncHandler(async (req, res) => {
+      const { paragraphs } = req.body;
+      const imageFile = req.file;
 
-            if (!paragraphs || paragraphs.trim() === '') {
-                  return res.status(400).json({
-                        message: "Paragraphs are required.",
-                        success: false,
-                        error: true,
-                  });
+      const dataToSave = {};
+
+      if (imageFile) {
+            const uploadResult = await uploadImageOnCloudinary(imageFile);
+            if (!uploadResult?.secure_url) {
+                  throw new ApiError(500, "Failed to upload image to Cloudinary.");
             }
-
-            if (!image) {
-                  return res.status(400).json({
-                        message: "Image is required.",
-                        success: false,
-                        error: true,
-                  });
-            }
-            const UpdatingParagraph = paragraphs.split(/(?<=[.?!])\s+/);
-
-            // console.log(UpdatingParagraph);
-            
-
-            if (UpdatingParagraph.length === 0) {
-                  return res.status(400).json({
-                        message: "Paragraphs cannot be empty after splitting. Please provide valid text.",
-                        success: false,
-                        error: true,
-                  });
-            }
-
-            const uploadImage = await uploadImageOnCloudinary(image); 
-            if (!uploadImage?.secure_url) {
-                  return res.status(500).json({
-                        message: "Image upload failed.",
-                        success: false,
-                        error: true,
-                  });
-            }
-
-            const aboutContent = await AboutModel.create({
-                  aboutImage: uploadImage.secure_url,
-                  paragraphs: UpdatingParagraph,
-            });
-
-            res.status(201).json({
-                  message: "About content created successfully.",
-                  success: true,
-                  data: aboutContent,
-            });
-
-      } catch (error) {
-            console.error("Error in addAboutContent:", error);
-            res.status(500).json({
-                  message: "Internal Server Error.",
-                  success: false,
-                  error: error.message,
-            });
+            dataToSave.aboutImage = uploadResult?.secure_url;
       }
+
+      if (paragraphs) {
+            dataToSave.paragraphs = processParagraphs(paragraphs);
+      }
+
+      let aboutContent = await AboutModel.findOne();
+      let wasCreated = false;
+
+      if (aboutContent) {
+            aboutContent = await AboutModel.findByIdAndUpdate(
+                  aboutContent._id,
+                  { $set: dataToSave },
+                  { new: true, runValidators: true }
+            );
+      } else {
+            aboutContent = await AboutModel.create(dataToSave);
+            wasCreated = true;
+      }
+
+      if (!aboutContent) {
+            throw new ApiError(500, "Failed to save the 'About' content.");
+      }
+
+      const statusCode = wasCreated ? 201 : 200;
+      const message = wasCreated
+            ? "About content added successfully."
+            : "About content updated successfully.";
+
+      return res.status(statusCode).json(new ApiResponse(statusCode, aboutContent, message));
 });
