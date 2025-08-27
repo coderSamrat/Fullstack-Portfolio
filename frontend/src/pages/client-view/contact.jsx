@@ -6,7 +6,7 @@ import { contactFormIndex } from '@/config/allFormIndex';
 import { Facebook, Github, Instagram, Linkedin, Mail } from 'lucide-react';
 import React, { useState } from 'react';
 import profileImage from '@/assets/profileimage.jpeg';
-import { conatct } from '@/config/contactDetails';
+import { contact } from '@/config/contactDetails';
 import { Link } from 'react-router-dom';
 
 const intialFormData = {
@@ -37,7 +37,7 @@ const MyContact = () => {
                                           </CardHeader>
                                           <CardContent className="space-y-4">
                                                 {
-                                                      conatct.map((contact, index) => (
+                                                      contact.map((contact, index) => (
                                                             <ContactDetail key={index} label={contact.label} value={
                                                                   <Link to={contact.link} target="_blank" rel="noopener noreferrer">{contact.value}</Link>
                                                             } />

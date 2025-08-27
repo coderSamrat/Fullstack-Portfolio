@@ -1,4 +1,4 @@
-export const conatct = [
+export const contact = [
       {
             label: 'Name',
             value: 'Samrat Mallick',
