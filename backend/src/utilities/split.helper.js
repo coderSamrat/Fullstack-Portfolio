@@ -1,10 +1,10 @@
-export const processTitles = (title) => {
-      if (Array.isArray(title)) {
-            return title.filter(Boolean);
+export const processSplit = (values) => {
+      if (Array.isArray(values)) {
+            return values.filter(Boolean);
       }
-      if (typeof title === 'string') {
 
-            return title.split(',').map(t => t.trim()).filter(Boolean);
+      if (typeof values === 'string') {
+            return values.split(',').map(t => t.trim()).filter(Boolean);
       }
       return [];
 };

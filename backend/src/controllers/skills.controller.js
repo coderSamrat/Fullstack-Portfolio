@@ -25,8 +25,12 @@ export const createSkillCategory = async (req, res) => {
                   new ApiResponse(201, newSkillCategory, "Skill category created successfully.")
             );
       } catch (error) {
-            console.error("Error creating skill category:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 };
 
@@ -37,8 +41,12 @@ export const getAllSkillCategories = asyncHandler(async (req, res) => {
                   new ApiResponse(200, skillCategories, "Skill categories retrieved successfully.")
             );
       } catch (error) {
-            console.error("Error retrieving skill categories:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -53,8 +61,12 @@ export const getSkillCategoryById = asyncHandler(async (req, res) => {
                   new ApiResponse(200, skillCategory, "Skill category retrieved successfully.")
             );
       } catch (error) {
-            console.error("Error retrieving skill category:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -69,8 +81,12 @@ export const deleteSkillCategory = asyncHandler(async (req, res) => {
                   new ApiResponse(200, {}, "Skill category deleted successfully.")
             );
       } catch (error) {
-            console.error("Error deleting skill category:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -100,8 +116,12 @@ export const addSkillToCategory = asyncHandler(async (req, res) => {
                   new ApiResponse(200, category, "Skill added to category successfully.")
             );
       } catch (error) {
-            console.error("Error adding skill to category:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -144,8 +164,12 @@ export const updateSkillToCategory = asyncHandler(async (req, res) => {
                   new ApiResponse(200, updateSkillCategory, "Skill updated in category successfully.")
             );
       } catch (error) {
-            console.error("Error updating skill in category:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -171,7 +195,11 @@ export const deleteSkillFromCategory = asyncHandler(async (req, res) => {
                   new ApiResponse(200, updatedCategory, "Skill removed from category successfully.")
             );
       } catch (error) {
-            console.error("Error removing skill from category:", error);
-            throw new ApiError(500, "Internal Server Error", [error.message]);
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });

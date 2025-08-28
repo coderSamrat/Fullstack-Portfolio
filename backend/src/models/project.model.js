@@ -11,7 +11,7 @@ const projectSchema = new mongoose.Schema(
                   required: true,
             },
             technologies: {
-                  type: Boolean,
+                  type: [String],
             },
             githubUrl: {
                   type: String,
@@ -21,6 +21,8 @@ const projectSchema = new mongoose.Schema(
             },
             status: {
                   type: String,
+                  enum: ['In Progress', 'Completed', 'On Hold'],
+                  default: 'Completed',
             },
       }, { timestamps: true }
 );

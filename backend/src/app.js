@@ -4,6 +4,7 @@ import { heroRouter } from './routes/hero.routes.js';
 import { aboutRouter } from './routes/about.routes.js';
 import { educationRouter } from './routes/education.routes.js';
 import { skillRouter } from './routes/skills.routes.js';
+import { projectRouter } from './routes/project.routes.js';
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use('/api/v1/hero', heroRouter);
 app.use('/api/v1/about', aboutRouter);
 app.use('/api/v1/education', educationRouter);
 app.use('/api/v1/skills', skillRouter);
+app.use('/api/v1/projects', projectRouter);
 
 export { app };

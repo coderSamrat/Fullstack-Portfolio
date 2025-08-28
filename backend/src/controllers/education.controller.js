@@ -43,7 +43,12 @@ export const createEducation = asyncHandler(async (req, res) => {
                   new ApiResponse(201, newEducation, "Education entry created successfully.")
             );
       } catch (error) {
-            throw new ApiError(500, "An error occurred while creating the education entry.");
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -59,7 +64,12 @@ export const getAllEducation = asyncHandler(async (req, res) => {
                   new ApiResponse(200, allEducation, "All education entries retrieved successfully.")
             );
       } catch (error) {
-            throw new ApiError(500, "An error occurred while retrieving education entries.");
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -76,7 +86,12 @@ export const getEducationById = asyncHandler(async (req, res) => {
                   new ApiResponse(200, education, "Education entry retrieved successfully.")
             );
       } catch (error) {
-            throw new ApiError(500, "An error occurred while retrieving the education entry.");
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -107,7 +122,12 @@ export const updateEducation = asyncHandler(async (req, res) => {
                   new ApiResponse(200, updatedEducation, "Education entry updated successfully.")
             );
       } catch (error) {
-            throw new ApiError(500, "An error occurred while updating the education entry.");
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
 
@@ -125,6 +145,11 @@ export const deleteEducation = asyncHandler(async (req, res) => {
                   new ApiResponse(200, {}, "Education entry deleted successfully.")
             );
       } catch (error) {
-            throw new ApiError(500, "An error occurred while deleting the education entry.");
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.log(error);
+            
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });
