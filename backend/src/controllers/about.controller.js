@@ -52,7 +52,7 @@ export const addAndUpdateAboutContent = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
             
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -73,7 +73,7 @@ export const getAboutContent = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
             
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }

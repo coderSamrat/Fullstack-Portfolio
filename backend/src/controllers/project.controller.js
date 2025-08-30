@@ -46,7 +46,7 @@ export const addProject = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
 
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -65,7 +65,7 @@ export const getAllProjects = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
 
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -89,7 +89,7 @@ export const getProjectById = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
 
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -136,7 +136,7 @@ export const updateProject = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
 
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -162,7 +162,7 @@ export const deleteProject = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
 
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }

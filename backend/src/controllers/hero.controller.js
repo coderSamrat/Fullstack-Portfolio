@@ -8,7 +8,14 @@ import { processSplit} from "../utilities/split.helper.js";
 export const addAndUpdateHeroContent = asyncHandler(async (req, res) => {
       try {
             const { name, title, description, resumeLink } = req.body;
+            if ([name, title, description, resumeLink].some(field => !field || String(field).trim() === '')) {
+                  throw new ApiError(400, "Please provide all required fields.");
+            }
+
             const imageFile = req.file;
+            if (!imageFile) {
+                  throw new ApiError(400, "Please provide a profile image.");
+            }
       
             const dataToSave = {};
       

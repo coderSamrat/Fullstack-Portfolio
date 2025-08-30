@@ -46,7 +46,7 @@ export const createEducation = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
             
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -67,7 +67,7 @@ export const getAllEducation = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
             
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -89,7 +89,7 @@ export const getEducationById = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
             
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -125,7 +125,7 @@ export const updateEducation = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
             
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
@@ -148,7 +148,7 @@ export const deleteEducation = asyncHandler(async (req, res) => {
             if (error instanceof ApiError) {
                   throw new Error(error);
             }
-            console.log(error);
+            console.error(error);
             
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
