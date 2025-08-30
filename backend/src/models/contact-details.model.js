@@ -4,17 +4,21 @@ const contactDetailsSchema = new Schema(
       {
             contactImage: {
                   type: String,
-                  required: true,
             },
-            constctDetails: [
-                  {
-                        name: String,
-                        email: String,
-                        mobile: String,
-                        address: String,
-                  }
-            ]
+            name: {
+                  type: String,
+            },
+            email: {
+                  type: String,
+            },
+            mobile: {
+                  type: String,
+            },
+            address: {
+                  type: String,
+            },
+            
       }, { timestamps: true }
 );
 
-export const ContactDetails = mongoose.model("ContactDetails", contactDetailsSchema);
+export const ContactDetailsModel = mongoose.model("ContactDetails", contactDetailsSchema);

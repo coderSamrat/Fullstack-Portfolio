@@ -39,7 +39,7 @@ export const addAndUpdateHeroContent = asyncHandler(async (req, res) => {
                   heroContent = await HeroModel.findByIdAndUpdate(
                         heroContent._id,
                         { $set: dataToSave },
-                        { new: true, runValidators: true }
+                        { new: true }
                   );
             } else {
                   heroContent = await HeroModel.create(dataToSave);
@@ -68,7 +68,7 @@ export const addAndUpdateHeroContent = asyncHandler(async (req, res) => {
 
 export const getHeroContent = asyncHandler(async (req, res) => {
       try {
-            const heroContent = await HeroModel.findOne();
+            const heroContent = await HeroModel.find();
 
             if (!heroContent) {
                   throw new ApiError(404, "Hero content not found.");
