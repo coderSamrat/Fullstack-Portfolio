@@ -39,7 +39,7 @@ const ProjectCard = ({
                         <div className="flex flex-wrap space-x-2 gap-2">
                               {githubUrl && (
                                     <Link to={githubUrl} target="_blank" rel="noopener noreferrer">
-                                          <Button variant="outline" size="sm" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                          <Button variant="outline" size="sm" className="hover:bg-primary text-muted-foreground hover:text-white transition-colors duration-300 ease-out">
                                                 <Github className="w-4 h-4 mr-2" />
                                                 Code
                                           </Button>

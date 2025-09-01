@@ -1,5 +1,5 @@
 import heroImage from "@/assets/hero-bg.jpg";
-import profileImage from "@/assets/profileimage.jpeg";
+import profileImage from "@/assets/profileimage.png";
 import Hero from "@/components/user-view/hero";
 import AboutMe from "@/components/user-view/about";
 import MySkills from "@/components/user-view/skill";

@@ -24,7 +24,7 @@ const MyEducation = () => {
                                           <CardContent>
                                                 <p className="text-muted-foreground mb-4">{item.description}</p>
                                                 {item.certification && (
-                                                      <Button variant="outline" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                      <Button variant="outline" className="hover:bg-primary text-muted-foreground hover:text-white transition-colors duration-300 ease-out">
                                                             <ExternalLink className="w-4 h-4 mr-2" />
                                                             View Certificate
                                                       </Button>

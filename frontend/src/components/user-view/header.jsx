@@ -64,7 +64,7 @@ const Header = () => {
                   <div className='container mx-auto flex items-center justify-between h-20 px-4 md:px-6'>
                         <Link to={'/'} className='flex items-end select-none'>
                               <span className='text-5xl font-bold text-green-600'>S</span>
-                              <span className='font-bold text-3xl'>amrat</span>
+                              <span className='font-bold text-3xl'>amrat.</span>
                         </Link>
                         {
                               isMobile && (

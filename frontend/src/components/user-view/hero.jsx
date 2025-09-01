@@ -32,7 +32,7 @@ const Hero = ({
                               <img
                                     src={profileImage}
                                     alt="Samrat Mallick"
-                                    className="w-60 h-60 rounded-full mx-auto mb-8 lg:mt-0 mt-6 border-4 border-primary/20 animate-float"
+                                    className="w-60 h-60 object-contain rounded-full mx-auto mb-8 lg:mt-0 mt-6 border-4 border-primary/20 animate-float"
                               />
                               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
                                     Samrat Mallick
