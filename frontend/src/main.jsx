@@ -7,6 +7,6 @@ import { Toaster } from './components/ui/sonner.jsx';
 createRoot(document.getElementById('root')).render(
       <BrowserRouter>
             <App />
-            <Toaster />
+            <Toaster position="bottom-right"  />
       </BrowserRouter>
 );
