@@ -16,6 +16,20 @@ export const contactmeAndSendEmail = asyncHandler(async (req, res) => {
                   throw new ApiError(400, "All fields are required.");
             }
 
+
+            if (email) {
+                  if (!/^\S+@\S+\.\S+$/.test(email)) {
+                        throw new ApiError(400, "Please provide a valid email address.");
+                  }
+            }
+
+            const phoneRegex = /^\+?[\d\s-]{7,15}$/;
+            if (mobile) {
+                  if (!phoneRegex.test(mobile)) {
+                        throw new ApiError(400, "Please provide a valid phone number, including the country code if applicable.");
+                  }
+            }
+
             const newContactMessage = await ContactMe.create({
                   name,
                   email,
@@ -30,8 +44,6 @@ export const contactmeAndSendEmail = asyncHandler(async (req, res) => {
             const mailReceived = {
                   from: `"${name}" <${PORTFOLIO_OWNER_EMAIL}>`,
                   replyTo: email,
-                  bcc: PORTFOLIO_OWNER_EMAIL,
-                  cc: PORTFOLIO_OWNER_EMAIL,
                   subject: `🚀 New Message from ${name} via Portfolio`,
                   html: receiverEmailTemplate({ name, email, mobile, message }),
             };
@@ -39,7 +51,6 @@ export const contactmeAndSendEmail = asyncHandler(async (req, res) => {
             const mailSendToSender = {
                   from: `"${PORTFOLIO_OWNER_NAME}" <${PORTFOLIO_OWNER_EMAIL}>`,
                   to: email,
-                  bcc: PORTFOLIO_OWNER_EMAIL,
                   cc: PORTFOLIO_OWNER_EMAIL,
                   subject: 'Thank you for your message!',
                   html: senderEmailTemplate({ name, message }),
@@ -48,14 +59,20 @@ export const contactmeAndSendEmail = asyncHandler(async (req, res) => {
             const [mailReceivedInfo, mailSendToSenderInfo] = await Promise.all([
                   transporter.sendMail(mailReceived),
                   transporter.sendMail(mailSendToSender),
-            ]);
-
-            console.log('Emails sent successfully');
-            return res.status(200).json(new ApiResponse(200, "Message & emails sent successfully", {
-                  savedMessage: newContactMessage,
-                  mailReceivedInfo,
-                  mailSendToSenderInfo,
-            }));
+            ]).then((results) => {
+                  console.log('Emails sent successfully');
+                  return results;
+            }).catch((error) => {
+                  console.error('Error sending emails:', error);
+                  throw new ApiError(500, "Error sending emails", [error.message]);
+            });
+            return res.status(200).json(
+                  new ApiResponse(200, "Message & emails sent successfully", {
+                        savedMessage: newContactMessage,
+                        mailReceivedInfo,
+                        mailSendToSenderInfo,
+                  })
+            );
 
       } catch (error) {
             if (error instanceof ApiError) {
@@ -63,6 +80,68 @@ export const contactmeAndSendEmail = asyncHandler(async (req, res) => {
             }
             console.error(error);
 
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
+      }
+});
+
+export const getAllContactMeMessages = asyncHandler(async (req, res) => {
+      try {
+            const messages = await ContactMe.find();
+            if (!messages) {
+                  throw new ApiError(404, "No messages found");
+            }
+            return res.status(200).json(
+                  new ApiResponse(200, "Messages fetched successfully", messages)
+            );
+      } catch (error) {
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.error(error);
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
+      }
+});
+
+export const getContactMeMessages = asyncHandler(async (req, res) => {
+      try {
+            const { messageId } = req.params;
+            if (!messageId) {
+                  throw new ApiError(400, "Message ID is required");
+            }
+            const message = await ContactMe.findById({ _id: messageId });
+            if (!message) {
+                  throw new ApiError(404, "Message not found");
+            }
+            return res.status(200).json(
+                  new ApiResponse(200, "Message fetched successfully", message)
+            );
+      } catch (error) {
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.error(error);
+            throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
+      }
+});
+
+export const deleteContactMeMessage = asyncHandler(async (req, res) => {
+      try {
+            const { messageId } = req.params;
+            if (!messageId) {
+                  throw new ApiError(400, "Message ID is required");
+            }
+            const deletedMessage = await ContactMe.findByIdAndDelete({ _id: messageId }, { new: true });
+            if (!deletedMessage) {
+                  throw new ApiError(404, "Message not found");
+            }
+            return res.status(200).json(
+                  new ApiResponse(200, {}, "Message deleted successfully")
+            );
+      } catch (error) {
+            if (error instanceof ApiError) {
+                  throw new Error(error);
+            }
+            console.error(error);
             throw new ApiError(500, "An unexpected error occurred while processing the request.", [error.message]);
       }
 });

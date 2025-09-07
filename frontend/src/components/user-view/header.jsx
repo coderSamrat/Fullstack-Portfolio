@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useMobile } from '../common/useMobileHook';
 import { Menu, X } from 'lucide-react';
-import { ThemeToggle } from './theme-toggle';
+import { ThemeToggle } from '../common/theme-toggle';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { navigationMenu } from '@/config/menu';
 import ContactMeBtn from './contact-btn';
-
-
 
 const Header = () => {
       const [isMenuOpen, setIsMenuOpen] = useState(false);
