@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-import { useDisableContextMenuAndCopy } from './components/common/useDisableContextMenuAndCopy';
-import MyPortfolio from './pages/client-view/portfolio';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import MyPortfolio from './pages/client-view/portfolio';
 import MyPortfoliopageLayout from './components/user-view/layout';
 import MyAllProjectList from './pages/client-view/project-listing';
 import MyContact from './pages/client-view/contact';
+import { useDisableContextMenuAndCopy } from './components/common/useDisableContextMenuAndCopy';
 
 const App = () => {
       // useDisableContextMenuAndCopy();
-
       return (
             <div className="flex flex-col overflow-hidden bg-background min-h-screen">
                   <Routes>

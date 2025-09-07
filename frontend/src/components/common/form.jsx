@@ -1,7 +1,10 @@
 import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
+import { Label } from '../ui/label';
 
 const types = {
       Input: 'input',
@@ -10,60 +13,79 @@ const types = {
 
 const CommonForm = ({
       formControls,
-      formData,
-      setFormData,
       onSubmit,
       buttonText
 }) => {
+      const initialValues = formControls.reduce((acc, control) => {
+            acc[control.name] = '';
+            return acc;
+      }, {});
+
+      const validationSchema = Yup.object(
+            formControls.reduce((acc, control) => {
+                  let schema = Yup.string();
+                  if (control.validation) {
+                        if (control.validation.required) {
+                              schema = schema.required(`${control.label} is required`);
+                        }
+                        if (control.validation.email) {
+                              schema = schema.email(`Invalid email format for ${control.label}`);
+                        }
+                  }
+                  acc[control.name] = schema;
+                  return acc;
+            }, {})
+      );
+
+
+      const formik = useFormik({
+            initialValues,
+            validationSchema,
+            onSubmit: (values) => {
+                  onSubmit(values);
+            },
+      });
 
       const renderInputsByComponentsType = (getControlItems) => {
-            const value = formData[getControlItems.name] ?? '';
+            const { name, placeholder, type, componentType, rows, label } = getControlItems;
+            const fieldProps = formik.getFieldProps(name);
+
             const commonProps = {
-                  name: getControlItems.name,
-                  placeholder: getControlItems.placeholder,
-                  id: getControlItems.name,
-                  value: value,
-                  onChange: (e) =>
-                        setFormData({
-                              ...formData,
-                              [getControlItems.name]: e.target.value,
-                        }),
+                  ...fieldProps,
+                  placeholder,
+                  id: name,
             };
-            switch (getControlItems.componentType) {
-                  case types.Input:
-                        return (
-                              <Input
-                                    {...commonProps}
-                                    type={getControlItems.type}
-                                    className={`${getControlItems.type === 'number' ? 'hide-number-arrows' : ''}`}
-                              />
-                        );
-                  case types.Textarea:
-                        return (
+
+            return (
+                  <div className="grid w-full gap-1.5">
+                        <Label htmlFor={name}>{label}</Label>
+                        {componentType === types.Textarea ? (
                               <Textarea
                                     {...commonProps}
-                                    rows={getControlItems.rows}
+                                    rows={rows}
                                     className={'resize-none'}
                               />
-                        );
-                  default:
-                        return (
+                        ) : (
                               <Input
                                     {...commonProps}
-                                    type={getControlItems.type || 'text'}
+                                    type={type}
+                                    className={`${type === 'number' ? 'hide-number-arrows' : ''}`}
                               />
-                        );
-            }
+                        )}
+                        {formik.touched[name] && formik.errors[name] ? (
+                              <div className="text-red-500 text-sm">{formik.errors[name]}</div>
+                        ) : null}
+                  </div>
+            );
       };
 
       return (
-            <form onSubmit={onSubmit} className='space-y-4'>
+            <form onSubmit={formik.handleSubmit} className='space-y-4'>
                   <div className='flex flex-col gap-6'>
                         {
                               formControls.map((controlItems) => (
                                     <div
                                           key={controlItems.name}
-                                          className='grid w-full gap-1.5'
                                     >
                                           {
                                                 renderInputsByComponentsType(controlItems)

@@ -4,21 +4,13 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import ContactDetail from '@/components/user-view/contact-details';
 import { contactFormIndex } from '@/config/allFormIndex';
 import { Facebook, Github, Instagram, Linkedin, Mail } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 import profileImage from '@/assets/profileimage.jpeg';
 import { contact } from '@/config/contactDetails';
 import { Link } from 'react-router-dom';
 
-const intialFormData = {
-      name: '',
-      email: '',
-      mobile: '',
-      message: '',
-}
 const MyContact = () => {
-      const [formData, setFormData] = useState(intialFormData);
-      const handleSubmit = (e) => {
-            e.preventDefault();
+      const handleSubmit = (formData) => {
             console.log('Form submitted with data:', formData);
       };
       return (
@@ -45,19 +37,19 @@ const MyContact = () => {
                                                 }
                                           </CardContent>
                                           <CardFooter className={'flex items-center gap-4 flex-wrap'}>
-                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                <Button variant="outline" size="sm" className="hover:bg-primary text-muted-foreground hover:text-white transition-colors duration-300 ease-out">
                                                       <Facebook className="w-5 h-5 mr-2" />
                                                       Facebook
                                                 </Button>
-                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                <Button variant="outline" size="sm" className="hover:bg-primary text-muted-foreground hover:text-white transition-colors duration-300 ease-out">
                                                       <Instagram className="w-5 h-5 mr-2" />
                                                       Instagram
                                                 </Button>
-                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                <Button variant="outline" size="sm" className="hover:bg-primary text-muted-foreground hover:text-white transition-colors duration-300 ease-out">
                                                       <Github className="w-5 h-5 mr-2" />
                                                       GitHub
                                                 </Button>
-                                                <Button variant="outline" size="lg" className="hover:bg-primary hover:text-muted transition-colors duration-300 ease-out">
+                                                <Button variant="outline" size="sm" className="hover:bg-primary text-muted-foreground hover:text-white transition-colors duration-300 ease-out">
                                                       <Linkedin className="w-5 h-5 mr-2" />
                                                       LinkedIn
                                                 </Button>
@@ -73,8 +65,6 @@ const MyContact = () => {
                                           <CardContent>
                                                 <CommonForm
                                                       formControls={contactFormIndex}
-                                                      formData={formData}
-                                                      setFormData={setFormData}
                                                       onSubmit={handleSubmit}
                                                       buttonText="Send Message"
                                                 />
