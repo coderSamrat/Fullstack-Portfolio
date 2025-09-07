@@ -46,3 +46,4 @@ Fullstack_Portfolio/
 
 - `npm start` (backend): Starts the backend server.
 - `npm run dev` (frontend): Starts the frontend development server.
+- `npx npm-check-updates -u && npm install` : to update npm packages.
