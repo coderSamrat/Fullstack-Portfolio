@@ -43,7 +43,7 @@ This is a complete website project I built to use as my portfolio. It shows my p
 
 -   **`npm run dev`**: Starts the Vite development server for the frontend.
 
-# Update Packages
+### Update Packages
 -  **`npx npm-check-updates -u && npm install`**:  Update nmp packages.
 
 ## Contributing
