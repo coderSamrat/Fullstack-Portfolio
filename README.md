@@ -54,8 +54,4 @@ Contributions are welcome! Please fork the repository, create a feature branch, 
 
 Samrat Mallick 
 
-- [Email](mailto:your-samratmallick832@gmail.com)
-
-- [LinkedIn](https://www.linkedin.com/in/samrat-mallick01/)
-
-- [GitHub](https://github.com/coderSamrat)
+- [Email](mailto:your-samratmallick832@gmail.com) - [LinkedIn](https://www.linkedin.com/in/samrat-mallick01/) - [GitHub](https://github.com/coderSamrat)
