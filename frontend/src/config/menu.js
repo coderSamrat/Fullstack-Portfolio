@@ -70,5 +70,11 @@ export const adminSidebarMenu = [
             label: 'Services',
             path: '/admin/services-list',
             icon: 'Wrench'
-      },      
-]
+      },  
+      {
+            name: 'settings',
+            label: 'Settings',
+            path: '/admin/settings',
+            icon: 'Settings'
+      },  
+];

@@ -81,6 +81,10 @@
       --sidebar-accent-foreground: hsl(222, 49%, 11%);
       --sidebar-border: hsl(214, 33%, 91%);
       --sidebar-ring: hsl(215, 23%, 65%);
+      --sidebar-active: hsl(222, 49%, 11%);
+      --sidebar-active-foreground: hsl(210, 35%, 98%);
+      --sidebar-hover: hsl(210, 41%, 96%);
+      --sidebar-hover-foreground: hsl(222, 49%, 11%);
 
 
       --hero-gradient: linear-gradient(135deg, hsl(221 83% 53%), hsl(142 76% 73%));
@@ -127,7 +131,10 @@
       --sidebar-accent-foreground: hsl(210, 35%, 98%);
       --sidebar-border: hsla(0, 0%, 100%, 0.10);
       --sidebar-ring: hsl(220, 10%, 46%);
-
+      --sidebar-active: hsl(225, 84%, 49%);
+      --sidebar-active-foreground: hsl(210, 35%, 98%);
+      --sidebar-hover: hsl(217, 36%, 18%);
+      --sidebar-hover-foreground: hsl(210, 35%, 98%);
 
       --hero-gradient: linear-gradient(135deg, hsl(221 83% 53%), hsl(142 76% 73%));
       --card-gradient: linear-gradient(145deg, oklab(22.118% -0.00175 -0.01068), oklab(25.146% -0.0012 -0.01216));
