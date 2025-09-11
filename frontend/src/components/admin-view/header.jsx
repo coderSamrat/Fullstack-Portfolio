@@ -10,10 +10,13 @@ const AdminHeader = ({ onMenuClick, isMobile, pageTitle }) => (
                   {
                         isMobile ? (
                               <Fragment>
-                                    <Link to={'/'} className='flex items-end select-none'>
-                                          <span className='text-5xl font-bold text-green-600'>S</span>
-                                          <span className='font-bold text-3xl'>amrat.</span>
-                                    </Link>
+                                    <div className='flex items-center flex-col justify-center'>
+                                          <div className='flex items-end px-4 select-none'>
+                                                <span className='text-5xl font-bold text-green-600'>S</span>
+                                                <span className='font-bold text-3xl'>amrat.</span>
+                                          </div>
+                                          <span className='text-xs'>Admin Panel</span>
+                                    </div>
                                     <div className="flex items-center justify-between gap-2">
                                           <ThemeToggle />
                                           <Button
