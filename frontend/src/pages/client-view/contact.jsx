@@ -14,7 +14,7 @@ const MyContact = () => {
             console.log('Form submitted with data:', formData);
       };
       return (
-            <section id="contact" className="py-20 bg-muted/30 mt-10">
+            <section id="contact" className="py-20 mt-10">
                   <div className="container mx-auto px-4">
                         <div className="w-full flex lg:flex-row flex-col items-center gap-4">
                               <h2 className="text-5xl font-bold text-center text-gradient">Get In Touch</h2>
@@ -23,7 +23,7 @@ const MyContact = () => {
                         <div className='w-full flex flex-col md:flex-row items-center gap-4 mt-8'>
                               <div className='md:w-1/2 w-full flex flex-col items-center justify-center gap-8'>
                                     <img src={profileImage} alt="Samrat Mallick" className="w-40 h-40 rounded-full mx-auto border-4 border-primary/20" />
-                                    <Card className="hover-lift border-0 tech-glow">
+                                    <Card className="hover-lift tech-glow">
                                           <CardHeader className="text-center text-3xl font-bold text-gradient">
                                                 <CardTitle>Connect & Location</CardTitle>
                                           </CardHeader>
@@ -58,7 +58,7 @@ const MyContact = () => {
 
                               </div>
                               <div className='md:w-1/2 w-full flex items-center justify-center'>
-                                    <Card className="hover-lift bg-background/30 border-0 tech-glow w-full max-w-lg flex flex-col p-4 md:p-6 lg:p-8">
+                                    <Card className="hover-lift bg-background/30 hover:border-0 tech-glow w-full max-w-lg flex flex-col p-4 md:p-6 lg:p-8">
                                           <CardHeader className="text-2xl font-semibold">
                                                 <CardTitle>Send Me a Message</CardTitle>
                                           </CardHeader>

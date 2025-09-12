@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ServiceCard = ({ title, description, icon, features }) => {
       return (
-            <Card className="hover-lift card-gradient border-0 tech-glow h-full">
+            <Card className="hover-lift tech-glow h-full">
                   <CardHeader className="text-center pb-2">
                         <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-primary/10">
                               {icon}

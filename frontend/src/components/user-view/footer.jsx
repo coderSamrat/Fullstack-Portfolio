@@ -41,7 +41,7 @@ const Footer = () => {
 
       return (
             <>
-                  <footer className="bg-background">
+                  <footer className="bg-background border-t border-gray-700">
                         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
                               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                     <div className="space-y-4">
@@ -77,13 +77,13 @@ const Footer = () => {
                                                 {email && (
                                                       <li className="flex items-center space-x-3">
                                                             <Mail className="w-5 h-5 text-primary" />
-                                                            <a href={email.link} className="hover:text-white transition-colors">{email.value}</a>
+                                                            <a href={email.link}>{email.value}</a>
                                                       </li>
                                                 )}
                                                 {mobile && (
                                                       <li className="flex items-center space-x-3">
                                                             <Phone className="w-5 h-5 text-primary" />
-                                                            <a href={mobile.link} className="hover:text-white transition-colors">{mobile.value}</a>
+                                                            <a href={mobile.link}>{mobile.value}</a>
                                                       </li>
                                                 )}
                                           </ul>

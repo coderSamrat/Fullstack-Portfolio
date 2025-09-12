@@ -3,7 +3,7 @@ import aboutprofileimage from "@/assets/aboutprofileimage.png";
 
 const AboutMe = () => {
       return (
-            <section id="about" className="py-20 bg-muted/30 ">
+            <section id="about" className="py-20 border-b border-gray-700 ">
                   <div className="container mx-auto px-4 flex gap-10 lg:flex-row flex-col items-center">
                         <div className='md:basis-[35%] basis-full mx-auto flex items-center justify-center'>
                               <img 

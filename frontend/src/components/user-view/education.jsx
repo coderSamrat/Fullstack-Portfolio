@@ -7,12 +7,12 @@ import { myEducationAndTraining } from '@/config/eudcation-traning';
 
 const MyEducation = () => {
       return (
-            <section id="education" className="py-20">
+            <section id="education" className="py-20 border-b border-gray-700">
                   <div className="container mx-auto px-4">
                         <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Education & Certifications</h2>
                         <div className="max-w-4xl mx-auto space-y-8">
                               {myEducationAndTraining.map((item, index) => (
-                                    <Card key={index} className="hover-lift card-gradient border-0 tech-glow animate-slide-up" style={{ animationDelay: `${index * 0.2}s` }}>
+                                    <Card key={index} className="hover-lift tech-glow animate-slide-up" style={{ animationDelay: `${index * 0.2}s` }}>
                                           <CardHeader>
                                                 <CardTitle className="flex items-center justify-between">
                                                       <span>{item.title}</span>

@@ -41,3 +41,57 @@ export const contactFormIndex = [
             }
       }
 ];
+
+export const adminHeroFormIndex = [
+      {
+            name: 'name',
+            label: 'Name',
+            type: 'text',
+            placeholder: 'Your Name',
+            componentType: 'input',
+            validation: {
+                  required: true,
+            }
+      },
+      {
+            name: 'title',
+            label: 'Title',
+            type: 'text',
+            placeholder: 'Your Titles',
+            componentType: 'input',
+            validation: {
+                  required: true,
+            }
+      },
+      {
+            name: 'description',
+            label: 'Description',
+            type: 'text',
+            placeholder: 'A short description about you',
+            componentType: 'textarea',
+            rows: 5,
+            validation: {
+                  required: true,
+            }
+      },
+      {
+            name: 'resumeLink',
+            label: 'Resume Link',
+            type: 'text',
+            placeholder: 'Link to your resume',
+            componentType: 'input',
+            validation: {
+                  required: false,
+            }
+      },
+      {
+            name: 'profileImage',
+            label: 'Profile Image',
+            type: 'file',
+            placeholder: 'Add your profile image',
+            componentType: 'input',
+            validation: {
+                  required: false,
+            }
+      }
+];

@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 
 const SkillCard = ({ title, skills }) => {
       return (
-            <Card className="p-6 hover-lift card-gradient border-0 tech-glow">
+            <Card className="p-6 hover-lift tech-glow">
                   <h3 className="text-xl font-semibold mb-4 text-gradient">{title}</h3>
                   <div className="space-y-4">
                         {skills.map((skill, index) => (
