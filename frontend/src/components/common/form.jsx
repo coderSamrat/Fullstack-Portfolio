@@ -1,10 +1,9 @@
 import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Label } from '../ui/label';
+import { Loader } from 'lucide-react';
 
 const types = {
       Input: 'input',
@@ -14,46 +13,23 @@ const types = {
 const CommonForm = ({
       formControls,
       onSubmit,
-      buttonText
+      buttonText,
+      values,
+      onChange,
+      errors,
+      isLoading
 }) => {
-      const initialValues = formControls.reduce((acc, control) => {
-            acc[control.name] = '';
-            return acc;
-      }, {});
-
-      const validationSchema = Yup.object(
-            formControls.reduce((acc, control) => {
-                  let schema = Yup.string();
-                  if (control.validation) {
-                        if (control.validation.required) {
-                              schema = schema.required(`${control.label} is required`);
-                        }
-                        if (control.validation.email) {
-                              schema = schema.email(`Invalid email format for ${control.label}`);
-                        }
-                  }
-                  acc[control.name] = schema;
-                  return acc;
-            }, {})
-      );
-
-
-      const formik = useFormik({
-            initialValues,
-            validationSchema,
-            onSubmit: (values) => {
-                  onSubmit(values);
-            },
-      });
 
       const renderInputsByComponentsType = (getControlItems) => {
             const { name, placeholder, type, componentType, rows, label } = getControlItems;
-            const fieldProps = formik.getFieldProps(name);
 
-            const commonProps = {
-                  ...fieldProps,
-                  placeholder,
-                  id: name,
+            const handleChange = (event) => {
+                  onChange(event.target.name, event.target.value);
+            };
+
+            const handleFileChange = (event) => {
+                  const file = event.currentTarget.files[0];
+                  onChange(name, file);
             };
 
             return (
@@ -61,26 +37,36 @@ const CommonForm = ({
                         <Label htmlFor={name}>{label}</Label>
                         {componentType === types.Textarea ? (
                               <Textarea
-                                    {...commonProps}
+                                    name={name}
+                                    id={name}
+                                    placeholder={placeholder}
                                     rows={rows}
                                     className={'resize-none'}
+                                    value={values[name]}
+                                    onChange={handleChange}
+                                    disabled={isLoading}
                               />
                         ) : (
                               <Input
-                                    {...commonProps}
+                                    name={name}
+                                    id={name}
+                                    placeholder={placeholder}
                                     type={type}
+                                    onChange={type === 'file' ? handleFileChange : handleChange}
+                                    value={type !== 'file' ? values[name] : undefined}
                                     className={`${type === 'number' ? 'hide-number-arrows' : ''}`}
+                                    disabled={isLoading}
                               />
                         )}
-                        {formik.touched[name] && formik.errors[name] ? (
-                              <div className="text-red-500 text-sm">{formik.errors[name]}</div>
+                        {errors && errors[name] ? (
+                              <div className="text-red-500 text-sm">{errors[name]}</div>
                         ) : null}
                   </div>
             );
       };
 
       return (
-            <form onSubmit={formik.handleSubmit} className='space-y-4'>
+            <form onSubmit={onSubmit} className='space-y-4'>
                   <div className='flex flex-col gap-6'>
                         {
                               formControls.map((controlItems) => (
@@ -94,8 +80,8 @@ const CommonForm = ({
                               ))
                         }
                   </div>
-                  <Button type="submit" className="w-full hero-gradient text-muted hover:opacity-90 mt-8">
-                        {buttonText || 'Submit'}
+                  <Button type="submit" className="w-full hero-gradient text-muted hover:opacity-90 mt-8" disabled={isLoading}>
+                        {isLoading ? <Loader className="animate-spin mx-auto" /> : (buttonText || 'Submit')}
                   </Button>
             </form>
       );

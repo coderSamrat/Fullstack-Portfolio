@@ -19,10 +19,9 @@
             "@radix-ui/react-slot": "^1.2.3",
             "@reduxjs/toolkit": "^2.9.0",
             "@tailwindcss/vite": "^4.1.13",
-            "axios": "^1.11.0",
+            "axios": "^1.12.2",
             "class-variance-authority": "^0.7.1",
             "clsx": "^2.1.1",
-            "formik": "^2.4.6",
             "lucide-react": "^0.542.0",
             "next-themes": "^0.4.6",
             "npm": "^11.6.0",
@@ -32,8 +31,7 @@
             "react-router-dom": "^7.8.2",
             "sonner": "^2.0.7",
             "tailwind-merge": "^3.3.1",
-            "tailwindcss": "^4.1.13",
-            "yup": "^1.7.0"
+            "tailwindcss": "^4.1.13"
       },
       "devDependencies": {
             "@eslint/js": "^9.35.0",

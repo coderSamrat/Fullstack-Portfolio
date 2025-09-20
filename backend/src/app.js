@@ -11,10 +11,10 @@ import { contactRouter } from './routes/contact.routes.js';
 const app = express();
 
 app.use(cors({
-      origin: process.env.CORS_ORIGIN,
-      methods: process.env.CORS_METHODS,
-      credentials: process.env.CORS_CREDENTIALS,
-      headers: process.env.CORS_HEADERS,
+      origin: process.env.CORS_ORIGIN.split(','),
+      methods: process.env.CORS_METHODS.split(','),
+      credentials: process.env.CORS_CREDENTIALS === 'true',
+      allowedHeaders: process.env.CORS_HEADERS.split(','),
 }));
 app.use(express.json());
 app.use(express.urlencoded());

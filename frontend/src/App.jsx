@@ -20,7 +20,7 @@ import AdminViewServices from './pages/admin-view/services';
 import AdminSettings from './pages/admin-view/settings';
 
 const App = () => {
-
+      
       return (
             <div className="flex flex-col overflow-hidden bg-background min-h-screen">
                   <Routes>
