@@ -13,9 +13,6 @@ export const addAndUpdateHeroContent = asyncHandler(async (req, res) => {
             }
 
             const imageFile = req.file;
-            if (!imageFile) {
-                  throw new ApiError(400, "Please provide a profile image.");
-            }
       
             const dataToSave = {};
       
