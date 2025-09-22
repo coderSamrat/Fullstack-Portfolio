@@ -3,16 +3,37 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import ContactDetail from '@/components/user-view/contact-details';
 import { contactFormIndex } from '@/config/allFormIndex';
-import { Facebook, Github, Instagram, Linkedin, Mail } from 'lucide-react';
-import React from 'react';
+import { Facebook, Github, Instagram, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
 import profileImage from '@/assets/profileimage.jpeg';
 import { contact } from '@/config/contactDetails';
 import { Link } from 'react-router-dom';
 
 const MyContact = () => {
-      const handleSubmit = (formData) => {
-            console.log('Form submitted with data:', formData);
+      // Initialize form state based on form controls
+      const initialFormData = contactFormIndex.reduce((acc, control) => {
+            acc[control.name] = '';
+            return acc;
+      }, {});
+
+      const [formData, setFormData] = useState(initialFormData);
+
+      const handleChange = (name, value) => {
+            setFormData(prev => ({
+                  ...prev,
+                  [name]: value
+            }));
       };
+
+      const handleSubmit = (e) => {
+            e.preventDefault();
+            // Here you would typically handle the form submission,
+            // e.g., send the data to a server.
+            console.log('Form submitted with data:', formData);
+            // You might want to clear the form after submission
+            setFormData(initialFormData);
+      };
+
       return (
             <section id="contact" className="py-20 mt-10">
                   <div className="container mx-auto px-4">
@@ -29,9 +50,9 @@ const MyContact = () => {
                                           </CardHeader>
                                           <CardContent className="space-y-4">
                                                 {
-                                                      contact.map((contact, index) => (
-                                                            <ContactDetail key={index} label={contact.label} value={
-                                                                  <Link to={contact.link} target="_blank" rel="noopener noreferrer">{contact.value}</Link>
+                                                      contact.map((contactItem, index) => (
+                                                            <ContactDetail key={index} label={contactItem.label} value={
+                                                                  <Link to={contactItem.link} target="_blank" rel="noopener noreferrer">{contactItem.value}</Link>
                                                             } />
                                                       ))
                                                 }
@@ -67,6 +88,8 @@ const MyContact = () => {
                                                       formControls={contactFormIndex}
                                                       onSubmit={handleSubmit}
                                                       buttonText="Send Message"
+                                                      values={formData}
+                                                      onChange={handleChange}
                                                 />
                                           </CardContent>
                                     </Card>

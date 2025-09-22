@@ -13,7 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const initialFormData = {
       name: "",
-      title: "",
+      title: [],
       description: "",
       resumeLink: "",
       profileImage: "",

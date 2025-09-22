@@ -21,10 +21,14 @@ const CommonForm = ({
 }) => {
 
       const renderInputsByComponentsType = (getControlItems) => {
-            const { name, placeholder, type, componentType, rows, label } = getControlItems;
+            const { name, placeholder, type, componentType, rows, label, disabled } = getControlItems;
 
             const handleChange = (event) => {
-                  onChange(event.target.name, event.target.value);
+                  if (type === 'checkbox') {
+                        onChange(event.target.name, event.target.checked);
+                  } else {
+                        onChange(event.target.name, event.target.value);
+                  }
             };
 
             const handleFileChange = (event) => {
@@ -44,7 +48,7 @@ const CommonForm = ({
                                     className={'resize-none'}
                                     value={values[name]}
                                     onChange={handleChange}
-                                    disabled={isLoading}
+                                    disabled={isLoading || disabled}
                               />
                         ) : (
                               <Input
@@ -54,8 +58,9 @@ const CommonForm = ({
                                     type={type}
                                     onChange={type === 'file' ? handleFileChange : handleChange}
                                     value={type !== 'file' ? values[name] : undefined}
+                                    checked={type === 'checkbox' ? values[name] : undefined}
                                     className={`${type === 'number' ? 'hide-number-arrows' : ''}`}
-                                    disabled={isLoading}
+                                    disabled={isLoading || disabled}
                               />
                         )}
                         {errors && errors[name] ? (

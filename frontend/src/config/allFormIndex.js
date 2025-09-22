@@ -5,9 +5,6 @@ export const contactFormIndex = [
             type: 'text',
             placeholder: 'Your Name',
             componentType: 'input',
-            validation: {
-                  required: true,
-            }
       },
       {
             name: 'email',
@@ -15,10 +12,6 @@ export const contactFormIndex = [
             type: 'email',
             placeholder: 'Your Email',
             componentType: 'input',
-            validation: {
-                  required: true,
-                  email: true,
-            }
       },
       {
             name: 'mobile',
@@ -26,9 +19,6 @@ export const contactFormIndex = [
             type: 'number',
             placeholder: 'Your Mobile Number',
             componentType: 'input',
-            validation: {
-                  required: true,
-            }
       },
       {
             name: 'message',
@@ -36,9 +26,6 @@ export const contactFormIndex = [
             placeholder: 'Your Message',
             componentType: 'textarea',
             rows: 5,
-            validation: {
-                  required: true,
-            }
       }
 ];
 
@@ -49,9 +36,6 @@ export const adminHeroFormIndex = [
             type: 'text',
             placeholder: 'Your Name',
             componentType: 'input',
-            validation: {
-                  required: true,
-            }
       },
       {
             name: 'title',
@@ -59,9 +43,6 @@ export const adminHeroFormIndex = [
             type: 'text',
             placeholder: 'Your Titles',
             componentType: 'input',
-            validation: {
-                  required: true,
-            }
       },
       {
             name: 'description',
@@ -70,9 +51,6 @@ export const adminHeroFormIndex = [
             placeholder: 'A short description about you',
             componentType: 'textarea',
             rows: 5,
-            validation: {
-                  required: true,
-            }
       },
       {
             name: 'resumeLink',
@@ -80,9 +58,6 @@ export const adminHeroFormIndex = [
             type: 'text',
             placeholder: 'Link to your resume',
             componentType: 'input',
-            validation: {
-                  required: false,
-            }
       },
       {
             name: 'profileImage',
@@ -90,8 +65,61 @@ export const adminHeroFormIndex = [
             type: 'file',
             placeholder: 'Add your profile image',
             componentType: 'input',
-            validation: {
-                  required: false,
-            }
+      }
+];
+
+export const adminAboutFormIndex = [
+      {
+            name: 'paragraphs',
+            label: 'Paragraphs',
+            type: 'text',
+            placeholder: 'A short paragraphs about you',
+            componentType: 'textarea',
+            rows: 5,
+      },
+      {
+            name: 'aboutImage',
+            label: 'About Image',
+            type: 'file',
+            placeholder: 'Add your about image',
+            componentType: 'input',
+      }
+];
+
+export const adminEducationFormIndex = [
+      {
+            name: 'title',
+            label: 'Title',
+            type: 'text',
+            placeholder: 'Title of your education',
+            componentType: 'input',
+      },
+      {
+            name: 'description',
+            label: 'Description',
+            type: 'text',
+            placeholder: 'A short description about your education',
+            componentType: 'textarea',
+            rows: 5,
+      },
+      {
+            name: 'certification',
+            label: 'Certification',
+            type: 'checkbox',
+            componentType: 'input',
+      },
+      {
+            name: 'certificateLink',
+            label: 'Certificate Link',
+            type: 'text',
+            placeholder: 'Link to your certificate',
+            componentType: 'input',
+      },
+      {
+            name: 'date',
+            label: 'Date',
+            type: 'text',
+            placeholder: 'Date of your education',
+            componentType: 'input',
       }
 ];

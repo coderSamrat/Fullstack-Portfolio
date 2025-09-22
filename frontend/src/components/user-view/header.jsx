@@ -89,6 +89,9 @@ const Header = () => {
                                                             <NavLink
                                                                   key={menu.name}
                                                                   to={menu.path}
+                                                                  onClick={() => {
+                                                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                                  }}
                                                                   className={({ isActive }) => (
                                                                         `${isActive ? "text-primary font-bold underline underline-offset-8" : "hover:text-primary hover:underline hover:underline-offset-8"} capitalize transition-colors cursor-pointer `
                                                                   )}

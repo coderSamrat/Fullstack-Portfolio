@@ -3,7 +3,6 @@ import { ApiError } from "../utilities/ApiError.js";
 import { ApiResponse } from "../utilities/ApiResponse.js";
 import { asyncHandler } from "../utilities/asyncHandler.js";
 import { uploadImageOnCloudinary } from "../utilities/cloudinary.config.js";
-import { processParagraphs } from "../utilities/split.helper.js";
 
 export const addAndUpdateAboutContent = asyncHandler(async (req, res) => {
       try {
@@ -21,7 +20,7 @@ export const addAndUpdateAboutContent = asyncHandler(async (req, res) => {
             }
 
             if (paragraphs) {
-                  dataToSave.paragraphs = processParagraphs(paragraphs);
+                  dataToSave.paragraphs = paragraphs;
             }
 
             let aboutContent = await AboutModel.findOne();

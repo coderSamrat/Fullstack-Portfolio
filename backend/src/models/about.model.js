@@ -6,7 +6,7 @@ const aboutSchema = new mongoose.Schema(
                   type: String,
             },
             paragraphs: {
-                  type: [String],
+                  type: String,
             }
       }, { timestamps: true }
 );

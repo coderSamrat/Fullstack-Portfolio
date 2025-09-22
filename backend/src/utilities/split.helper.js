@@ -8,13 +8,3 @@ export const processSplit = (values) => {
       }
       return [];
 };
-
-export const processParagraphs = (paragraphs) => {
-      if (Array.isArray(paragraphs)) {
-            return paragraphs.filter(Boolean);
-      }
-      if (typeof paragraphs === 'string') {
-            return paragraphs.split(/(?<=[.?!])\s+/);
-      }
-      return [];
-}
