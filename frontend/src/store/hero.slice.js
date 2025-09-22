@@ -21,7 +21,21 @@ export const addUpdateHeroData = createAsyncThunk(
                   return rejectWithValue(error.response?.data);
             }
       }
-)
+);
+
+export const fetchHeroData = createAsyncThunk(
+      "hero/fetchHeroData",
+      async (_, { rejectWithValue }) => {
+            try {
+                  const response = await axios.get(`${baseUrl}/api/v1/hero/get-hero-content`, {
+                        withCredentials: true,
+                  });
+                  return response.data;
+            } catch (error) {
+                  return rejectWithValue(error.response?.data);
+            }
+      }
+);
 
 const heroSlice = createSlice({
       name: "hero",
@@ -36,6 +50,16 @@ const heroSlice = createSlice({
                   state.heroData = action.payload.data || null;
                   state.error = null;
             }).addCase(addUpdateHeroData.rejected, (state, action) => {
+                  state.isLoading = false;
+                  state.error = action.payload;
+            }).addCase(fetchHeroData.pending, (state) => {
+                  state.isLoading = true;
+                  state.error = null;
+            }).addCase(fetchHeroData.fulfilled, (state, action) => {
+                  state.isLoading = false;
+                  state.heroData = action.payload.data || null;
+                  state.error = null;
+            }).addCase(fetchHeroData.rejected, (state, action) => {
                   state.isLoading = false;
                   state.error = action.payload;
             });

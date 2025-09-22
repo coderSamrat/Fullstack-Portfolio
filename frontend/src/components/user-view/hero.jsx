@@ -7,8 +7,7 @@ import ContactMeBtn from './contact-btn';
 
 const Hero = ({
       heroImage,
-      profileImage,
-      skillTexts,
+      data
 }) => {
       const navigate = useNavigate();
       const handleContactClick = () => {
@@ -30,22 +29,22 @@ const Hero = ({
                   <div className="container mx-auto px-4 z-10 text-center">
                         <div className="animate-fade-in">
                               <img
-                                    src={profileImage}
-                                    alt="Samrat Mallick"
+                                    src={data?.profileImage}
+                                    alt={data?.name || "Profile"}
                                     className="w-60 h-60 object-contain rounded-full mx-auto mb-8 lg:mt-0 mt-6 border-4 border-primary/20 animate-float"
                               />
                               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
-                                    Samrat Mallick
+                                    {data?.name || "Samrat Mallick"}
                               </h1>
                               <div className="text-2xl md:text-3xl mb-6 h-12">
-                                    <AnimatedText texts={skillTexts} className="text-muted-foreground" />
+                                    <AnimatedText texts={data?.title || []} className="text-muted-foreground" />
                               </div>
                               <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-                                    Passionate Full Stack Developer crafting innovative web solutions with modern technologies
+                                    {data?.description || "I am a passionate Full Stack Developer with expertise in building dynamic and responsive web applications. I love turning ideas into reality using code."}
                               </p>
                               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                                     <a
-                                          href="/resume.pdf"
+                                          href={data?.resumeLink}
                                           download
                                           target="_blank"
                                           rel="noopener noreferrer"

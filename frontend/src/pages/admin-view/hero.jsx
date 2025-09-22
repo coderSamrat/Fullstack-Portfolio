@@ -1,12 +1,15 @@
-import CommonForm from '@/components/common/form';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { adminHeroFormIndex } from '@/config/allFormIndex';
-import { addUpdateHeroData } from '@/store/hero.slice';
-import { Download } from 'lucide-react';
-import React, { Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'sonner';
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import { Download } from "lucide-react";
+
+import CommonForm from "@/components/common/form";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { adminHeroFormIndex } from "@/config/allFormIndex";
+import { addUpdateHeroData, fetchHeroData } from "@/store/hero.slice";
+import AnimatedText from "@/components/user-view/animated-text";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const initialFormData = {
       name: "",
@@ -17,117 +20,107 @@ const initialFormData = {
 };
 
 const AdminViewHero = () => {
-      const [formData, setFormData] = useState(initialFormData);
-      const [errors, setErrors] = useState({});
-      const [previewImage, setPreviewImage] = useState('');
       const dispatch = useDispatch();
-      const { heroData: heroDataFromStore, isLoading } = useSelector((state) => state.hero);
+      const { heroData, isLoading } = useSelector((state) => state.hero);
+      const [formData, setFormData] = useState(initialFormData);
 
       useEffect(() => {
-            if (heroDataFromStore) {
-                  const newHeroData = {
-                        name: heroDataFromStore.name || '',
-                        title: Array.isArray(heroDataFromStore.title)
-                              ? heroDataFromStore.title.join(', ')
-                              : heroDataFromStore.title || '',
-                        description: heroDataFromStore.description || '',
-                        resumeLink: heroDataFromStore.resumeLink || '',
-                        profileImage: heroDataFromStore.profileImage || '',
-                  };
+            dispatch(fetchHeroData());
+      }, [dispatch]);
 
-                  setFormData(newHeroData);
-
-                  setPreviewImage(
-                        typeof heroDataFromStore.profileImage === 'object'
-                              ? heroDataFromStore.profileImage.url || ''
-                              : heroDataFromStore.profileImage || ''
-                  );
+      useEffect(() => {
+            if (heroData && heroData.length > 0) {
+                  const data = heroData[0];
+                  setFormData({
+                        name: data.name || "",
+                        title: Array.isArray(data.title) ? data.title.join(", ") : "",
+                        description: data.description || "",
+                        resumeLink: data.resumeLink || "",
+                        profileImage: data.profileImage || "",
+                  });
             }
-      }, [heroDataFromStore]);
+      }, [heroData]);
 
       const handleChange = (name, value) => {
-            setFormData(prev => ({
+            setFormData((prev) => ({
                   ...prev,
-                  [name]: value
+                  [name]: value,
             }));
-
-            if (name === 'profileImage' && value instanceof File) {
-                  const reader = new FileReader();
-                  reader.onload = () => setPreviewImage(reader.result);
-                  reader.readAsDataURL(value);
-            }
-      };
-
-      const validate = () => {
-            const newErrors = {};
-            adminHeroFormIndex.forEach(control => {
-                  if (control.validation?.required && !formData[control.name]) {
-                        newErrors[control.name] = `${control.label} is required`;
-                  }
-            });
-            setErrors(newErrors);
-            return Object.keys(newErrors).length === 0;
       };
 
       const handleSubmit = async (e) => {
             e.preventDefault();
-            if (!validate()) {
-                  toast.error("Please fill all required fields");
-                  return;
+
+            const submissionData = new FormData();
+
+            submissionData.append("name", formData.name);
+            submissionData.append("description", formData.description);
+            submissionData.append("resumeLink", formData.resumeLink);
+            submissionData.append("title", formData.title);
+
+            if (formData.profileImage && formData.profileImage instanceof File) {
+                  submissionData.append("profileImage", formData.profileImage);
             }
 
             try {
-                  const dataToSend = new FormData();
-                  for (const key in formData) {
-                        dataToSend.append(key, formData[key]);
-                  }
-
-                  const res = await dispatch(addUpdateHeroData(dataToSend)).unwrap();
-                  toast.success(res?.message || "✅ Hero section updated!");
-                  console.log("Hero data updated:", res);
+                  await dispatch(addUpdateHeroData(submissionData)).unwrap();
+                  toast.success("Hero section updated successfully!");
+                  dispatch(fetchHeroData());
             } catch (err) {
-                  toast.error(`❌ Update failed: ${err?.message || 'Unknown error'}`);
-                  console.error("Update failed:", err);
+                  toast.error(err?.message || "Failed to update hero section.");
+                  console.error("Error updating hero section:", err);
+                  dispatch(fetchHeroData());
             }
       };
+
+      const currentDatabaseData = heroData && heroData.length > 0 ? heroData[0] : null;
 
       return (
             <Fragment>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                        {/* Live Preview */}
                         <div>
                               <Card>
                                     <CardHeader>
-                                          <CardTitle>Live Preview</CardTitle>
+                                          <CardTitle>Current Hero Section (From Database)</CardTitle>
                                     </CardHeader>
                                     <CardContent>
-                                          <div className="container mx-auto px-4 z-10 text-center">
-                                                <div className="animate-fade-in">
-                                                      {previewImage && (
-                                                            <img
-                                                                  src={previewImage}
-                                                                  alt={formData.name || "Profile"}
-                                                                  className="w-60 h-60 object-contain rounded-full mx-auto mb-8 border-4 border-primary/20"
-                                                            />
-                                                      )}
-                                                      <h1 className="text-3xl font-bold mb-6 text-gradient">
-                                                            {formData.name}
+                                          {isLoading ? (
+                                                <div className="container mx-auto px-4 text-center">
+                                                      <Skeleton className="w-60 h-60 rounded-full mx-auto mb-8" />
+                                                      <Skeleton className="h-10 w-3/4 mx-auto mb-6" />
+                                                      <Skeleton className="h-12 w-1/2 mx-auto mb-6" />
+                                                      <Skeleton className="h-24 w-full max-w-2xl mx-auto mb-8" />
+                                                      <Skeleton className="h-12 w-48 mx-auto" />
+                                                </div>
+                                          ) : currentDatabaseData ? (
+                                                <div className="container mx-auto px-4 text-center">
+                                                      <img
+                                                            src={currentDatabaseData?.profileImage}
+                                                            alt="Current Profile"
+                                                            className="w-60 h-60 object-contain rounded-full mx-auto mb-8 border-4 border-primary/20"
+                                                      />
+                                                      <h1 className="text-3xl font-bold mb-6 text-gradient h-10">
+                                                            {currentDatabaseData?.name}
                                                       </h1>
-                                                      <div className="text-2xl md:text-3xl mb-6 h-12">
-                                                            {formData.title}
-                                                      </div>
-                                                      <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-                                                            {formData.description}
+                                                      <AnimatedText
+                                                            texts={currentDatabaseData?.title}
+                                                            className="text-xl md:text-3xl mb-6 h-12"
+                                                      />
+                                                      <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
+                                                            {currentDatabaseData?.description}
                                                       </p>
-                                                      {formData.resumeLink && (
-                                                            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                                      {currentDatabaseData.resumeLink && (
+                                                            <div className="flex justify-center">
                                                                   <a
-                                                                        href={formData.resumeLink}
+                                                                        href={currentDatabaseData?.resumeLink}
                                                                         download
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
                                                                   >
-                                                                        <Button size="lg" className="hero-gradient text-muted hover:opacity-90 accent-glow">
+                                                                        <Button
+                                                                              size="lg"
+                                                                              className="hero-gradient text-muted hover:opacity-90 accent-glow"
+                                                                        >
                                                                               <Download className="w-5 h-5 mr-2" />
                                                                               Download Resume
                                                                         </Button>
@@ -135,27 +128,40 @@ const AdminViewHero = () => {
                                                             </div>
                                                       )}
                                                 </div>
-                                          </div>
+                                          ) : (
+                                                <div className="text-center p-8 text-muted-foreground">
+                                                      <p>No hero data found in the database.</p>
+                                                      <p>Please use the form to add content.</p>
+                                                </div>
+                                          )}
                                     </CardContent>
                               </Card>
                         </div>
 
-                        {/* Update Form */}
                         <div>
                               <Card>
                                     <CardHeader>
                                           <CardTitle>Update Hero Section</CardTitle>
                                     </CardHeader>
                                     <CardContent>
-                                          <CommonForm
-                                                formControls={adminHeroFormIndex}
-                                                buttonText={"Save Changes"}
-                                                onSubmit={handleSubmit}
-                                                values={formData}
-                                                onChange={handleChange}
-                                                errors={errors}
-                                                isLoading={isLoading}
-                                          />
+                                          {isLoading ? (
+                                                <div className="space-y-4">
+                                                      <Skeleton className="h-10 w-full" />
+                                                      <Skeleton className="h-10 w-full" />
+                                                      <Skeleton className="h-24 w-full" />
+                                                      <Skeleton className="h-10 w-full" />
+                                                      <Skeleton className="h-10 w-32" />
+                                                </div>
+                                          ) : (
+                                                <CommonForm
+                                                      formControls={adminHeroFormIndex}
+                                                      buttonText="Save Changes"
+                                                      onSubmit={handleSubmit}
+                                                      values={formData}
+                                                      onChange={handleChange}
+                                                      isLoading={isLoading}
+                                                />
+                                          )}
                                     </CardContent>
                               </Card>
                         </div>
