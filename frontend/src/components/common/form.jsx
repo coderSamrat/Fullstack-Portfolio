@@ -2,12 +2,14 @@ import React from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'; 
 import { Label } from '../ui/label';
 import { Loader } from 'lucide-react';
 
 const types = {
       Input: 'input',
-      Textarea: 'textarea'
+      Textarea: 'textarea',
+      Select: 'select' 
 };
 
 const CommonForm = ({
@@ -21,7 +23,7 @@ const CommonForm = ({
 }) => {
 
       const renderInputsByComponentsType = (getControlItems) => {
-            const { name, placeholder, type, componentType, rows, label, disabled } = getControlItems;
+            const { name, placeholder, type, componentType, rows, label, disabled, options } = getControlItems; // Added options
 
             const handleChange = (event) => {
                   if (type === 'checkbox') {
@@ -50,6 +52,25 @@ const CommonForm = ({
                                     onChange={handleChange}
                                     disabled={isLoading || disabled}
                               />
+                        ) : componentType === types.Select ? (
+                              <Select
+                                    name={name}
+                                    id={name}
+                                    onValueChange={(value) => onChange(name, value)}
+                                    value={values[name]}
+                                    disabled={isLoading || disabled}
+                              >
+                                    <SelectTrigger>
+                                          <SelectValue placeholder={placeholder} />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                          {options && options.map((option) => (
+                                                <SelectItem key={option.value} value={option.value}>
+                                                      {option.label}
+                                                </SelectItem>
+                                          ))}
+                                    </SelectContent>
+                              </Select>
                         ) : (
                               <Input
                                     name={name}

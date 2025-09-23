@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SkillCard from './skill-card';
 import * as Icons from 'lucide-react';
-import { getAllSkills } from '../../store/skills.slice';
 import SkillsSkeleton from '../loaders/SkillsSkeleton';
+import { getAllSkillCategories } from '@/store/skills.slice';
 
 const MySkills = () => {
       const dispatch = useDispatch();
       const { skillsData, isLoading } = useSelector((state) => state.skills);
 
       useEffect(() => {
-            dispatch(getAllSkills());
+            dispatch(getAllSkillCategories());
       }, [dispatch]);
 
       return (

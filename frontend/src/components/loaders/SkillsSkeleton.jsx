@@ -3,7 +3,7 @@ import { Card } from '../ui/card';
 import { Skeleton } from '../ui/skeleton';
 
 const SkillsSkeleton = () => (
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <>
             {[...Array(3)].map((_, i) => (
                   <Card key={i} className="p-6">
                         <Skeleton className="h-6 w-1/2 mb-4" />
@@ -20,7 +20,7 @@ const SkillsSkeleton = () => (
                         </div>
                   </Card>
             ))}
-      </div>
+      </>
 );
 
 export default SkillsSkeleton;

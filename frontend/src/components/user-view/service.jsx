@@ -18,7 +18,7 @@ const MyServices = () => {
                   <div className="container mx-auto px-4">
                         <h2 className="text-4xl font-bold text-center mb-12 text-gradient">My Services</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                              {isLoading || !servicesData || servicesData.length === 0 ? (
+                              {/* {isLoading || !servicesData || servicesData.length === 0 ? (
                                     <ServicesSkeleton />
                               ) : (
                                     servicesData.map((service, index) => {
@@ -37,7 +37,7 @@ const MyServices = () => {
                                                 </div>
                                           )
                                     })
-                              )}
+                              )} */}
                         </div>
                   </div>
             </section>

@@ -123,3 +123,51 @@ export const adminEducationFormIndex = [
             componentType: 'input',
       }
 ];
+
+export const adminSkillCategoryFormIndex = [
+      {
+            name: 'category',
+            label: 'Category',
+            type: 'text',
+            placeholder: 'Skill category name',
+            componentType: 'input',
+      }
+];
+
+export const adminSkillFormIndex = [
+      {
+            name: 'category',
+            label: 'Category',
+            type: 'text',
+            placeholder: 'Category to add the skill to',
+            componentType: 'input',
+      },
+      {
+            name: 'name',
+            label: 'Skill Name',
+            type: 'text',
+            placeholder: 'e.g. ReactJS',
+            componentType: 'input',
+      },
+      {
+            name: 'level',
+            label: 'Proficiency Level',
+            type: 'number',
+            placeholder: 'e.g. 90',
+            componentType: 'input',
+      },
+      {
+            name: 'iconName',
+            label: 'Icon Name',
+            type: 'text',
+            placeholder: 'e.g. Code2 from lucide-react',
+            componentType: 'input',
+      },
+      {
+            name: 'iconColor',
+            label: 'Icon Color',
+            type: 'text',
+            placeholder: 'e.g. text-blue-500 (tailwind class)',
+            componentType: 'input',
+      }
+];
